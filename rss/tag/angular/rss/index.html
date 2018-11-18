@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Angular - Rodrigo Fernández]]></title><description><![CDATA[Full-stack Javascript, Ionic and Startups]]></description><link>http://fdezromero.com/</link><image><url>http://fdezromero.com/favicon.png</url><title>Angular - Rodrigo Fernández</title><link>http://fdezromero.com/</link></image><generator>Ghost 2.6</generator><lastBuildDate>Sun, 18 Nov 2018 18:35:44 GMT</lastBuildDate><atom:link href="http://fdezromero.com/tag/angular/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Injecting Providers into Async Custom Validators in Angular]]></title><description><![CDATA[One of the first things developers do when we are building a new app is a signup form, that checks that every field is okay and shows an appropriate error message if it’s not.]]></description><link>http://fdezromero.com/injecting-providers-into-async-custom-validators-in-angular/</link><guid isPermaLink="false">5bf18fcaae310cb196c77254</guid><category><![CDATA[Angular]]></category><category><![CDATA[Ionic]]></category><dc:creator><![CDATA[Rodrigo Fernández]]></dc:creator><pubDate>Fri, 09 Feb 2018 11:00:00 GMT</pubDate><media:content url="http://fdezromero.com/content/images/2018/11/jantine-doornbos-398339-unsplash.jpg" medium="image"/><content:encoded><![CDATA[<img src="http://fdezromero.com/content/images/2018/11/jantine-doornbos-398339-unsplash.jpg" alt="Injecting Providers into Async Custom Validators in Angular"><p>One of the first things developers do when we are building a new app is a signup form, that checks that every field is okay and shows an appropriate error message if it’s not.</p><p>It’s also a common practice to check if the typed email is already registered or if the username is taken. Angular has some basic validators built in, but in order to check our API and return the status we need to write a custom async validator. Please read this great guide about <a href="https://www.joshmorony.com/advanced-forms-validation-in-ionic-2/" rel="noopener">Advanced Forms &amp; Validation in Ionic 2</a> by Josh Morony first.</p><p>The only part missing in the guide is to actually inject the provider in charge of connecting to our API and getting the result. This is a bit tricky since async validators need to have static properties and we can’t inject a provider directly, so we will have to pass it to the validator class by using its constructor. This will work from Angular 2 onwards, I’m using Ionic 2.</p><p>Here is how I solved it. If you know any way to improve this code, please leave a comment with a link to your code!</p><pre><code class="language-ts">import { FormControl } from '@angular/forms';
+import { UserService } from '../../providers/user-service/user-service';
+
+export class UserValidator {
+  static userService: UserService;
+  static EMAIL_REGEXP = /.+@.+\..+/;
+
+  constructor(userService: UserService) {
+    UserValidator.userService = userService;
+  }
+
+  // Async validator: `new UserValidator(userService).checkEmailAvailable`
+
+  checkEmailAvailable(input: FormControl) {
+    if (!input.value || !UserValidator.EMAIL_REGEXP.test(input.value)) {
+      return Promise.resolve({ invalid: true });
+    }
+
+    return UserValidator.userService.checkEmail(input.value)
+    .then(data =&gt; data &amp;&amp; data.available ? null : data)
+    .catch(err =&gt; console.error(err));
+  }
+}
+</code></pre>
+<p><br>We start making our class properties static, then we inject the provider UserService into the constructor. Because we have defined <code>userService</code> as static, we can assign the reference to the provider by using the Class.property syntax.</p><p>The validator function is actually very simple: it returns <code>null</code> if there aren’t any errors, or an object with every error set to true. My API actually returns <code>{ available: true }</code> if everything is okay and then I convert that to null, but you may handle this differently.</p><p>Now every time we want to use this validator, we need to call it from our parent class like <code>new UserValidator(userService).checkEmailAvailable</code> .</p><p>With this snippet, it would be fairly simple to create another validator function inside the <code>UserValidator</code> class to check if a username is taken or not.</p>]]></content:encoded></item></channel></rss>

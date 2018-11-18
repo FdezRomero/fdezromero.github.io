@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Rodrigo Fernández]]></title><description><![CDATA[Full-stack Javascript, Ionic and Startups]]></description><link>http://fdezromero.com/</link><image><url>http://fdezromero.com/favicon.png</url><title>Rodrigo Fernández</title><link>http://fdezromero.com/</link></image><generator>Ghost 2.6</generator><lastBuildDate>Sun, 18 Nov 2018 18:35:44 GMT</lastBuildDate><atom:link href="http://fdezromero.com/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Injecting Providers into Async Custom Validators in Angular]]></title><description><![CDATA[One of the first things developers do when we are building a new app is a signup form, that checks that every field is okay and shows an appropriate error message if it’s not.]]></description><link>http://fdezromero.com/injecting-providers-into-async-custom-validators-in-angular/</link><guid isPermaLink="false">5bf18fcaae310cb196c77254</guid><category><![CDATA[Angular]]></category><category><![CDATA[Ionic]]></category><dc:creator><![CDATA[Rodrigo Fernández]]></dc:creator><pubDate>Fri, 09 Feb 2018 11:00:00 GMT</pubDate><media:content url="http://fdezromero.com/content/images/2018/11/jantine-doornbos-398339-unsplash.jpg" medium="image"/><content:encoded><![CDATA[<img src="http://fdezromero.com/content/images/2018/11/jantine-doornbos-398339-unsplash.jpg" alt="Injecting Providers into Async Custom Validators in Angular"><p>One of the first things developers do when we are building a new app is a signup form, that checks that every field is okay and shows an appropriate error message if it’s not.</p><p>It’s also a common practice to check if the typed email is already registered or if the username is taken. Angular has some basic validators built in, but in order to check our API and return the status we need to write a custom async validator. Please read this great guide about <a href="https://www.joshmorony.com/advanced-forms-validation-in-ionic-2/" rel="noopener">Advanced Forms &amp; Validation in Ionic 2</a> by Josh Morony first.</p><p>The only part missing in the guide is to actually inject the provider in charge of connecting to our API and getting the result. This is a bit tricky since async validators need to have static properties and we can’t inject a provider directly, so we will have to pass it to the validator class by using its constructor. This will work from Angular 2 onwards, I’m using Ionic 2.</p><p>Here is how I solved it. If you know any way to improve this code, please leave a comment with a link to your code!</p><pre><code class="language-ts">import { FormControl } from '@angular/forms';
+import { UserService } from '../../providers/user-service/user-service';
+
+export class UserValidator {
+  static userService: UserService;
+  static EMAIL_REGEXP = /.+@.+\..+/;
+
+  constructor(userService: UserService) {
+    UserValidator.userService = userService;
+  }
+
+  // Async validator: `new UserValidator(userService).checkEmailAvailable`
+
+  checkEmailAvailable(input: FormControl) {
+    if (!input.value || !UserValidator.EMAIL_REGEXP.test(input.value)) {
+      return Promise.resolve({ invalid: true });
+    }
+
+    return UserValidator.userService.checkEmail(input.value)
+    .then(data =&gt; data &amp;&amp; data.available ? null : data)
+    .catch(err =&gt; console.error(err));
+  }
+}
+</code></pre>
+<p><br>We start making our class properties static, then we inject the provider UserService into the constructor. Because we have defined <code>userService</code> as static, we can assign the reference to the provider by using the Class.property syntax.</p><p>The validator function is actually very simple: it returns <code>null</code> if there aren’t any errors, or an object with every error set to true. My API actually returns <code>{ available: true }</code> if everything is okay and then I convert that to null, but you may handle this differently.</p><p>Now every time we want to use this validator, we need to call it from our parent class like <code>new UserValidator(userService).checkEmailAvailable</code> .</p><p>With this snippet, it would be fairly simple to create another validator function inside the <code>UserValidator</code> class to check if a username is taken or not.</p>]]></content:encoded></item><item><title><![CDATA[How To Connect Virtual Networks through a VPN in the New Azure Portal (Resource Manager)]]></title><description><![CDATA[This article covers a very common use case for startups using Microsoft Azure and BizSpark: how to connect virtual machines from two virtual networks in different subscriptions (or regions) with the new Azure Portal (Resource Manager or ARM).]]></description><link>http://fdezromero.com/how-to-connect-virtual-networks-through-a-vpn-in-the-new-azure-portal-resource-manager/</link><guid isPermaLink="false">5bf18c97ae310cb196c77217</guid><category><![CDATA[Azure]]></category><dc:creator><![CDATA[Rodrigo Fernández]]></dc:creator><pubDate>Sat, 01 Apr 2017 10:00:00 GMT</pubDate><media:content url="http://fdezromero.com/content/images/2018/11/1_KXZKF9RkS1Tdr0yYFGcY6Q.jpg" medium="image"/><content:encoded><![CDATA[<img src="http://fdezromero.com/content/images/2018/11/1_KXZKF9RkS1Tdr0yYFGcY6Q.jpg" alt="How To Connect Virtual Networks through a VPN in the New Azure Portal (Resource Manager)"><p>This article covers a very common use case for startups using Microsoft Azure and BizSpark: how to connect virtual machines from two virtual networks in different subscriptions (or regions) with the new Azure Portal (Resource Manager or ARM).</p><p>The BizSpark program gives startups like <a href="https://savelist.co/?utm_source=engineering_blog" rel="noopener">Savelist</a> free Azure credits for up to 3 years. The catch is that these credits are divided in several subscriptions with $150/€130 each (one per team member). In order to get the most out of the BizSpark credits, you’ll want to use more than one subscription, but all the resources you create are bound to that subscription. The <em>easiest</em> (note I didn’t write <em>easy</em>) way is to connect the virtual networks through a VPN at the infrastructure level, using what Azure calls <strong><strong>Virtual Network Gateways</strong></strong>.</p><h4 id="so-to-be-clear-this-article-supposes-that-">So to be clear, this article supposes that:</h4><ul><li>Your VMs and virtual networks were created in the <strong><strong>new Azure Portal</strong></strong>(<strong><strong>Resource Manager</strong></strong> mode or ARM), not the old Classic Portal (Service Manager mode or ASM) .</li><li>These VMs are in <strong><strong>different virtual networks</strong></strong>. It doesn’t matter if they are in the same subscription, in other subscription or in another Azure location. We’ll connect them with a secure VPN that will route the traffic over the Internet (but inside the Azure backbone). If they are in the same virtual network, the VMs will just see each other and you don’t need any of this.</li><li>You want to use the <strong><strong>Azure Portal</strong></strong> instead of the Azure CLI or PowerShell. Because we are cool dev hipsters, not SysAdmins from the 90s (although the Azure CLI is wrote in NodeJS and that’s also cool).</li></ul><hr><h4 id="requirements">Requirements</h4><p>Before we can connect the virtual networks, there are some requirements and considerations:</p><ul><li>The <strong><strong>address spaces</strong></strong> of the virtual networks <strong><strong>cannot collide</strong></strong>. If they did, when a VM wanted to connect to a local IP, the virtual network wouldn’t know how to route this request.</li><li>We will need to <strong><strong>create two Virtual Network Gateways</strong></strong>, one for each network. These cost around $27/€23 a piece (in March 2016).</li><li>You may also have to pay for <strong><strong>outbound data traffic sent between the networks</strong></strong> if they are in different regions or outside of Azure, as the VPN connection will be established using public IPs, and therefore routed through the Internet. You won’t be charged twice, as inbound traffic is always free.</li></ul><h4 id="deployment-overview">Deployment Overview</h4><p>These are all the resources we will use. I’ll be using the letters <strong><strong>a</strong></strong> and <strong><strong>b</strong></strong> to refer to each side of the connection. You can name them whatever you want but I recommend writing your equivalent in a cheat sheet:</p><ul><li>2 existing Virtual Networks: <strong><strong>network-a</strong></strong> and <strong><strong>network-b</strong></strong>.</li><li>2 or more existing Subnets: <strong><strong>subnet-a</strong></strong> and <strong><strong>subnet-b</strong></strong>, inside <em>network-a</em> and <em>network-b</em>, respectively.</li><li>2 new Virtual Network Gateways: <strong><strong>vpn-gateway-a</strong></strong> and <strong><strong>vpn-gateway-b</strong></strong>.</li><li>2 new Public IP addresses for the Virtual Network Gateways: <strong><strong>vpn-ip-a</strong></strong> and <strong><strong>vpn-ip-b</strong></strong>.</li><li>2 new Local Network Gateways: <strong><strong>local-gateway-a</strong></strong> and <strong><strong>local-gateway-b</strong></strong>.</li><li>2 new Connections: <strong><strong>vpn-connection-a</strong></strong> and <strong><strong>vpn-connection-b</strong></strong>.</li></ul><p>In the example I will be also considering that you have 2 different subscriptions, resource groups and locations.</p><blockquote>If you have your virtual networks under the same subscription, resource group or location it’s okay, just consider that the following are the same in your case.</blockquote><ul><li>2 Subscriptions: <strong><strong>subscription-a</strong></strong> and <strong><strong>subscription-b</strong></strong> (can be the same).</li><li>2 Resource Groups: <strong><strong>resource-group-a</strong></strong> and <strong><strong>resource-group-b</strong></strong> (can be the same).</li><li>2 Locations: <strong><strong>location-a</strong></strong> and <strong><strong>location-b</strong></strong> (can be the same).</li></ul><h4 id="network-specs">Network Specs</h4><p>These are the specs of the two networks. Notice that the IP address spaces are different, so they don’t collide. If they do now, you will have to change the address space in one of them before you continue.</p><pre><code>network-a
+  Address space: 10.0.0.0/16
+  Subnets:
+    subnet-a: 10.0.0.0/24
+network-b
+  Address space: 10.1.0.0/16
+  Subnets:
+    subnet-b: 10.1.0.0/24
+</code></pre>
+<h3 id="1-create-the-gateway-subnets">1. Create the Gateway Subnets</h3><p>The Virtual Network Gateways that we will create in the next step need that the networks have a special subnet inside exactly named <strong><strong>GatewaySubnet</strong></strong>. If you already have them just skip this step.</p><p>Go to <em>Virtual networks &gt; Settings &gt; Subnets</em> and click the add Gateway subnet button. Choose an address space inside <strong><strong>network-a</strong></strong> that is bigger or equal to /29 and that doesn’t collide with the other subnets. For simplicity, I’m using /24. Repeat the steps with <strong><strong>network-b</strong></strong> so you end up with something like this:</p><pre><code>network-a
+  Address space: 10.0.0.0/16
+  Subnets:
+    subnet-a: 10.0.0.0/24
+    GatewaySubnet: 10.0.1.0/24
+network-b
+  Address space: 10.1.0.0/16
+  Subnets:
+    subnet-b: 10.1.0.0/24
+    GatewaySubnet: 10.1.1.0/24
+</code></pre>
+<h3 id="2-create-the-virtual-network-gateways">2. Create the Virtual Network Gateways</h3><p>Go to <em>Virtual network gateways &gt; Add</em> and select the following:</p><pre><code>Name: vpn-gateway-a
+Virtual network: network-a
+Public IP address: vpn-ip-a (new)
+Gateway type: VPN
+VPN type: Route-based
+Subscription: subscription-a
+Resource group: resource-group-a
+Location: location-a
+</code></pre>
+<p>Repeat the steps for the other subscription/network:</p><pre><code>Name: vpn-gateway-b
+Virtual network: network-b
+Public IP address: vpn-ip-b (new)
+Gateway type: VPN
+VPN type: Route-based
+Subscription: subscription-b
+Resource group: resource-group-b
+Location: location-b
+</code></pre>
+<p>The deploy can take up to 45 minutes, but we can set some other things up meanwhile.</p><h3 id="3-find-the-ip-addresses">3. Find the IP addresses</h3><p>When the deploy of the previous step starts, you will have 2 new public IP addresses, <strong><strong>vpn-ip-a</strong></strong> and <strong><strong>vpn-ip-b</strong></strong>. It’s okay if the Virtual Network gateways are still deploying because the IPs are created at the beginning. If there aren’t there just wait a couple of minutes and refresh the list.</p><p>Go to <em>Public IP addresses, </em>select <strong><strong>vpn-ip-a</strong></strong> and write down its number because we will need it later on. Do the same for <strong><strong>vpn-ip-b</strong></strong>. Let’s say these are my public IPs (yours will be different):</p><pre><code>vpn-ip-a: 40.84.0.1
+vpn-ip-b: 40.84.0.2
+</code></pre>
+<h3 id="4-create-the-local-network-gateways">4. Create the Local Network Gateways</h3><p>This is the tricky part that took me a couple of hours to figure out. In each side of the VPN, we have a virtual network with a virtual gateway (probably still deploying) that acts as a door to the outside Internet that sends and receives traffic to the other end. But we need something to tell our virtual network “hey, for these local IP address outside your address space, you will have to get them through the door at 40.84.0.X”.</p><p>So <strong><strong>network-a</strong></strong> needs to know that the 10.1.0.0/16 range, that is outside its address space (10.0.0.0/16), is reachable through <strong><strong>vpn-ip-b</strong></strong> (40.84.0.2). And <strong><strong>network-b</strong></strong> (10.1.0.0/16) needs to know that the outside space 10.0.0.0/16 is reachable through <strong><strong>vpn-ip-a</strong></strong> (40.84.0.1). This something is a <strong><strong>Local Network Gateway</strong></strong>.</p><p>Go to <em>Local network gateways &gt; Add</em> and create one for <strong><strong>network-a</strong></strong>:</p><pre><code>Name: local-gateway-b
+IP address: 40.84.0.2 (vpn-ip-b)
+Address space: 10.1.0.0/16
+Subscription: subscription-a
+Resource group: resource-group-a
+Location: location-a
+</code></pre>
+<p>See what happened here? We created the <strong><strong>local-gateway-b</strong></strong> in the same subscription and resource group as <strong><strong>network-a</strong></strong>, with the public IP and address space of <strong><strong>network-b</strong></strong>. This is how <strong><strong>network-a</strong></strong> knows how to get to an IP from <strong><strong>network-b</strong></strong>.</p><p>Let’s now create the one for <strong><strong>network-b</strong></strong>:</p><pre><code>Name: local-gateway-a
+IP address: 40.84.0.1 (vpn-ip-a)
+Address space: 10.0.0.0/16
+Subscription: subscription-b
+Resource group: resource-group-b
+Location: location-b
+</code></pre>
+<h3 id="5-create-the-connections">5. Create the Connections</h3><blockquote>From this point forward you need both Virtual Network Gateways to have finished deploying. If they haven’t, just chill out <a href="https://savelist.co/?utm_source=engineering_blog" rel="noopener">or have a look at what we do at Savelist</a>.</blockquote><p>With the Virtual Network Gateways deployed, we now need to create a connection between <strong><strong>local-gateway-b</strong></strong> and <strong><strong>vpn-gateway-a</strong></strong> (for <em>network-a</em>) and another between <strong><strong>local-gateway-a</strong></strong> and <strong><strong>vpn-gateway-b</strong></strong> (for <em>network-b</em>). This will complete the traffic routing.</p><pre><code>   network-a
+local-gateway-b
+ vpn-gateway-a
+      ||
+   Internet
+      ||
+ vpn-network-b
+local-gateway-a
+  network-b
+</code></pre>
+<p>Go to <em>Local network gateways</em> in <strong><strong>subscription-a</strong></strong> and select <strong><strong>local-gateway-b</strong></strong>and then<strong><strong> </strong></strong><em>Settings &gt; Connections &gt; Add</em>. The <em>Connection type</em> will already have <em>Site-to-site (IPsec)</em> selected and greyed out.</p><p>You can choose any mix of letters and numbers as your shared key (PSK), as long as you put the same in both <strong><strong>vpn-connection-a</strong></strong> and <strong><strong>vpn-connection-b</strong></strong>. It acts as a password to secure the connection.</p><blockquote>Pro tip: <a href="https://www.grc.com/passwords.htm" rel="noopener">The GRC site generates ultra secure passwords just for you through HTTPS</a>. I copied and pasted the one in the 3rd box.</blockquote><pre><code>Name: vpn-connection-b
+Connection type: Site-to-site (IPsec)
+Virtual network gateway: vpn-gateway-a
+Local network gateway: local-gateway-b (locked)
+Shared key (PSK): (choose a mix of letters and numbers)
+Subscription: subscription-a
+Location: location-a
+</code></pre>
+<p>Repeat the process for <strong><strong>local-gateway-a</strong></strong> in <strong><strong>subscription-b</strong></strong>:</p><pre><code>Name: vpn-connection-a
+Connection type: Site-to-site (IPsec)
+Virtual network gateway: vpn-gateway-b
+Local network gateway: local-gateway-a (locked)
+Shared key (PSK): (paste the same key as before)
+Subscription: subscription-b
+Location: location-b
+</code></pre>
+<p>If everything went well, after a few minutes the Virtual Networks Gateways will establish a connection and show with the <em>Connected</em> status. If it doesn’t work after 10 minutes, check that the IPs and address spaces in the Local Network Gateways are correct and from the <strong><strong>other</strong></strong> network.</p><h3 id="6-test-the-connection">6. Test the Connection</h3><p>You can just now log into a machine in <strong><strong>network-a</strong></strong> and try to access a machine in <strong><strong>network-b</strong></strong>, and viceversa. You will see the traffic increase in the connection details. If it doesn’t work, check the network security groups used by your virtual machines and/or virtual networks. If the VPN connection shows <em>Connected</em>, then is working fine and something else in your networks is blocking the communication.</p><hr><blockquote>Special thanks to <a href="https://twitter.com/DevStarlight" rel="noopener">Jesús Huerta</a>, who helped me translate the old and confusing articles from Microsoft to the newer Azure Portal and ARM.</blockquote>]]></content:encoded></item></channel></rss>
