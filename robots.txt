@@ -1,4 +1,4 @@
 User-agent: *
-Sitemap: http://fdezromero.com/sitemap.xml
+Sitemap: https://fdezromero.com/sitemap.xml
 Disallow: /ghost/
 Disallow: /p/
