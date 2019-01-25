@@ -9,12 +9,12 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=9577a2cec2.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css?v=aa9bc082ca" />
 
-    <link rel="shortcut icon" href="../favicon.png" type="image/png" />
-    <link rel="canonical" href="index.html" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://fdezromero.com/tips-and-tricks-for-ionic-on-desktop/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="amp/index.html" />
+    <link rel="amphtml" href="https://fdezromero.com/tips-and-tricks-for-ionic-on-desktop/amp/" />
     
     <meta property="og:site_name" content="Rodrigo Fernández" />
     <meta property="og:type" content="article" />
@@ -83,15 +83,15 @@
 }
     </script>
 
-    <script src="../public/ghost-sdk.js%3Fv=9577a2cec2"></script>
+    <script src="/public/ghost-sdk.js?v=aa9bc082ca"></script>
 <script>
 ghost.init({
 	clientId: "ghost-frontend",
 	clientSecret: "23eef7face45"
 });
 </script>
-    <meta name="generator" content="Ghost 2.6" />
-    <link rel="alternate" type="application/rss+xml" title="Rodrigo Fernández" href="../rss/index.html" />
+    <meta name="generator" content="Ghost 2.12" />
+    <link rel="alternate" type="application/rss+xml" title="Rodrigo Fernández" href="https://fdezromero.com/rss/" />
     <style type="text/css">
 /**
  * Prism One Dark Theme
@@ -286,12 +286,12 @@ pre.line-numbers > code {
     <div class="inner">
         <nav class="site-nav">
     <div class="site-nav-left">
-                <a class="site-nav-logo" href="../index.html"><img src="../content/images/2018/11/publication-logo.png" alt="Rodrigo Fernández" /></a>
+                <a class="site-nav-logo" href="https://fdezromero.com"><img src="https://fdezromero.com/content/images/2018/11/publication-logo.png" alt="Rodrigo Fernández" /></a>
             <ul class="nav" role="menu">
-    <li class="nav-home" role="menuitem"><a href="../index.html">Home</a></li>
-    <li class="nav-talks" role="menuitem"><a href="../talks/index.html">Talks</a></li>
-    <li class="nav-ionic" role="menuitem"><a href="../tag/ionic/index.html">Ionic</a></li>
-    <li class="nav-about-me" role="menuitem"><a href="../author/rodrigo/index.html">About me</a></li>
+    <li class="nav-home" role="menuitem"><a href="https://fdezromero.com/">Home</a></li>
+    <li class="nav-talks" role="menuitem"><a href="https://fdezromero.com/talks/">Talks</a></li>
+    <li class="nav-ionic" role="menuitem"><a href="https://fdezromero.com/tag/ionic/">Ionic</a></li>
+    <li class="nav-about-me" role="menuitem"><a href="https://fdezromero.com/author/rodrigo/">About me</a></li>
 </ul>
 
     </div>
@@ -316,12 +316,23 @@ pre.line-numbers > code {
             <header class="post-full-header">
                 <section class="post-full-meta">
                     <time class="post-full-meta-date" datetime="2018-02-15">15 February 2018</time>
-                        <span class="date-divider">/</span> <a href="../tag/ionic/index.html">Ionic</a>
+                        <span class="date-divider">/</span> <a href="/tag/ionic/">Ionic</a>
                 </section>
                 <h1 class="post-full-title">Tips &amp; Tricks for Ionic on Desktop</h1>
             </header>
 
-            <figure class="post-full-image" style="background-image: url(../content/images/2018/11/desktop-trick-img.jpg)">
+            <figure class="post-full-image">
+                <img
+                    srcset="https://fdezromero.com/content/images/size/w300/2018/11/desktop-trick-img.jpg 300w,
+                            https://fdezromero.com/content/images/size/w600/2018/11/desktop-trick-img.jpg 600w,
+                            https://fdezromero.com/content/images/size/w1000/2018/11/desktop-trick-img.jpg 1000w,
+                            https://fdezromero.com/content/images/size/w2000/2018/11/desktop-trick-img.jpg 2000w"
+                    sizes="(max-width: 800px) 400px,
+                            (max-width: 1170px) 700px,
+                            1400px"
+                    src="https://fdezromero.com/content/images/size/w2000/2018/11/desktop-trick-img.jpg"
+                    alt="Tips &amp; Tricks for Ionic on Desktop"
+                />
             </figure>
 
             <section class="post-full-content">
@@ -364,7 +375,7 @@ ion-header .toolbar {
  }
 }
 </code></pre>
-<p>If there is any <code>&lt;ion-toolbar&gt;</code> inside <code>&lt;ion-header&gt;</code> or <code>&lt;ion-footer&gt;</code>, you may want to add the <code>fixed</code> attribute to center them, like <code>&lt;ion-toolbar fixed&gt;</code>.</p><h3 id="showing-tabs-at-the-top">Showing tabs at the top</h3><p>While users are used to having tabs at the bottom in mobile apps, desktop webs usually show them at the top for better usability and navigation. Well known apps like Twitter, Pinterest and Instagram all use tabs at the top for their desktop experience.</p><p>Fortunately, Ionic Framework allows us to easily customize the position and layout of the tabs, so we can have bottom tabs with icons on top in our mobile experience:</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image.png" class="kg-image"></figure><p>And top tabs with icons on the left for our desktop experience:</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image-1.png" class="kg-image"></figure><p>To achieve this we can bind class properties to the <code>tabsPlacement</code> and <code>tabsLayout</code> attributes of our <code>&lt;ion-tabs&gt;</code>:</p><pre><code class="language-html">&lt;ion-tabs [tabsPlacement]=&quot;tabsPlacement&quot; [tabsLayout]=&quot;tabsLayout&quot;&gt;
+<p>If there is any <code>&lt;ion-toolbar&gt;</code> inside <code>&lt;ion-header&gt;</code> or <code>&lt;ion-footer&gt;</code>, you may want to add the <code>fixed</code> attribute to center them, like <code>&lt;ion-toolbar fixed&gt;</code>.</p><h3 id="showing-tabs-at-the-top">Showing tabs at the top</h3><p>While users are used to having tabs at the bottom in mobile apps, desktop webs usually show them at the top for better usability and navigation. Well known apps like Twitter, Pinterest and Instagram all use tabs at the top for their desktop experience.</p><p>Fortunately, Ionic Framework allows us to easily customize the position and layout of the tabs, so we can have bottom tabs with icons on top in our mobile experience:</p><figure class="kg-card kg-image-card"><img src="https://fdezromero.com/content/images/2018/11/image.png" class="kg-image"></figure><p>And top tabs with icons on the left for our desktop experience:</p><figure class="kg-card kg-image-card"><img src="https://fdezromero.com/content/images/2018/11/image-1.png" class="kg-image"></figure><p>To achieve this we can bind class properties to the <code>tabsPlacement</code> and <code>tabsLayout</code> attributes of our <code>&lt;ion-tabs&gt;</code>:</p><pre><code class="language-html">&lt;ion-tabs [tabsPlacement]=&quot;tabsPlacement&quot; [tabsLayout]=&quot;tabsLayout&quot;&gt;
     &lt;!-- Tabs here --&gt;
 &lt;ion-tabs&gt;
 </code></pre>
@@ -385,7 +396,7 @@ export class AppComponent {
   }
 }
 </code></pre>
-<p>You can check the different placement and layout options in the <a href="https://ionicframework.com/docs/api/components/tabs/Tabs/">Tabs docs</a>.</p><h3 id="using-the-responsive-grid-and-breakpoints">Using the responsive grid and breakpoints</h3><p>One of Savelist’s key features is the ability to show all the products you have saved from the web in a clear and organized layout, so cards in a responsive grid was the best way to go in displaying that information.</p><p>This option lets you have one or two cards per row on mobile, and more cards as the screen gets bigger. Cards don’t have a fixed width and make the best use of the available space.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image-2.png" class="kg-image"><figcaption>Mobile</figcaption></figure><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image-3.png" class="kg-image"><figcaption>Tablet</figcaption></figure><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image-4.png" class="kg-image"><figcaption>Desktop</figcaption></figure><p>It’s easy to achieve this layout with the help of the grid breakpoints we set up before and <code>col-{breakpoint}-{#}</code>:</p><pre><code class="language-html">&lt;ion-grid fixed&gt;
+<p>You can check the different placement and layout options in the <a href="https://ionicframework.com/docs/api/components/tabs/Tabs/">Tabs docs</a>.</p><h3 id="using-the-responsive-grid-and-breakpoints">Using the responsive grid and breakpoints</h3><p>One of Savelist’s key features is the ability to show all the products you have saved from the web in a clear and organized layout, so cards in a responsive grid was the best way to go in displaying that information.</p><p>This option lets you have one or two cards per row on mobile, and more cards as the screen gets bigger. Cards don’t have a fixed width and make the best use of the available space.</p><figure class="kg-card kg-image-card"><img src="https://fdezromero.com/content/images/2018/11/image-2.png" class="kg-image"><figcaption>Mobile</figcaption></figure><figure class="kg-card kg-image-card"><img src="https://fdezromero.com/content/images/2018/11/image-3.png" class="kg-image"><figcaption>Tablet</figcaption></figure><figure class="kg-card kg-image-card"><img src="https://fdezromero.com/content/images/2018/11/image-4.png" class="kg-image"><figcaption>Desktop</figcaption></figure><p>It’s easy to achieve this layout with the help of the grid breakpoints we set up before and <code>col-{breakpoint}-{#}</code>:</p><pre><code class="language-html">&lt;ion-grid fixed&gt;
  &lt;ion-row&gt;
    &lt;ion-card ion-col *ngFor=&quot;let product of products&quot; col-6 col-md-4 col-lg-3&gt;&lt;/ion-card&gt;
  &lt;/ion-row&gt;
@@ -405,14 +416,14 @@ export class AppComponent {
 
                     
 <section class="author-card">
-        <img class="author-profile-image" src="https://www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s=250&amp;d=mm&amp;r=x" alt="Rodrigo Fernández" />
+        <img class="author-profile-image" src="//www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Rodrigo Fernández" />
     <section class="author-card-content">
-        <h4 class="author-card-name"><a href="../author/rodrigo/index.html">Rodrigo Fernández</a></h4>
-            <p>CTO &amp; Co-Founder at @SavelistCo. Making online shopping easier. #Fullstack #Javascript is my weapon of choice. #Ionic Madrid Co-organizer. #PWA #Angular #Nodejs</p>
+        <h4 class="author-card-name"><a href="/author/rodrigo/">Rodrigo Fernández</a></h4>
+            <p>CTO &amp; Co-Founder at @SavelistCo. @IonicFramework Contributor &amp; @IonicMadrid Co-organizer. #Fullstack #Javascript is my weapon of choice. #PWA #Angular #Nodejs</p>
     </section>
 </section>
 <div class="post-full-footer-right">
-    <a class="author-card-button" href="../author/rodrigo/index.html">Read More</a>
+    <a class="author-card-button" href="/author/rodrigo/">Read More</a>
 </div>
 
 
@@ -445,38 +456,53 @@ export class AppComponent {
     <div class="inner">
         <div class="read-next-feed">
                 <article class="read-next-card"
-                            style="background-image: url(../content/images/2018/11/publication-cover-1.jpg)"
+                            style="background-image: url(https://fdezromero.com/content/images/size/w600/2018/11/publication-cover-1.jpg)"
                 >
                     <header class="read-next-card-header">
                         <small class="read-next-card-header-sitetitle">&mdash; Rodrigo Fernández &mdash;</small>
-                        <h3 class="read-next-card-header-title"><a href="../tag/ionic/index.html">Ionic</a></h3>
+                        <h3 class="read-next-card-header-title"><a href="/tag/ionic/">Ionic</a></h3>
                     </header>
                     <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
 </div>
                     <div class="read-next-card-content">
                         <ul>
-                            <li><a href="../injecting-providers-into-async-custom-validators-in-angular/index.html">Injecting Providers into Async Custom Validators in Angular</a></li>
+                            <li><a href="/injecting-providers-into-async-custom-validators-in-angular/">Injecting Providers into Async Custom Validators in Angular</a></li>
                         </ul>
                     </div>
                     <footer class="read-next-card-footer">
-                        <a href="../tag/ionic/index.html">1 post →</a>
+                        <a href="/tag/ionic/">1 post →</a>
                     </footer>
                 </article>
 
-                <article class="post-card post tag-web">
-        <a class="post-card-image-link" href="../how-i-host-this-static-ghost-blog-on-github-pages-with-wget/index.html">
-            <div class="post-card-image" style="background-image: url(https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f)"></div>
-        </a>
+                <article class="post-card post tag-web ">
+
+    <a class="post-card-image-link" href="/how-i-host-this-static-ghost-blog-on-github-pages-with-wget/">
+        <img class="post-card-image"
+            srcset="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f 300w,
+                    https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f 600w,
+                    https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f 1000w,
+                    https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f 2000w"
+            sizes="(max-width: 1000px) 400px, 700px"
+            src="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f"
+            alt="How I Host this Static Ghost Blog on Github Pages with wget"
+        />
+    </a>
+
     <div class="post-card-content">
-        <a class="post-card-content-link" href="../how-i-host-this-static-ghost-blog-on-github-pages-with-wget/index.html">
+
+        <a class="post-card-content-link" href="/how-i-host-this-static-ghost-blog-on-github-pages-with-wget/">
+
             <header class="post-card-header">
                     <span class="post-card-tags">Web</span>
                 <h2 class="post-card-title">How I Host this Static Ghost Blog on Github Pages with wget</h2>
             </header>
+
             <section class="post-card-excerpt">
                 <p>Generating a static site from a local Ghost blog with wget instead of Buster and hosting it at GitHub Pages.</p>
             </section>
+
         </a>
+
         <footer class="post-card-meta">
 
             <ul class="author-list">
@@ -486,30 +512,49 @@ export class AppComponent {
                         Rodrigo Fernández
                     </div>
 
-                        <a href="../author/rodrigo/index.html" class="static-avatar"><img class="author-profile-image" src="https://www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s=250&amp;d=mm&amp;r=x" alt="Rodrigo Fernández" /></a>
+                        <a href="/author/rodrigo/" class="static-avatar">
+                            <img class="author-profile-image" src="//www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Rodrigo Fernández" />
+                        </a>
                 </li>
             </ul>
 
             <span class="reading-time">4 min read</span>
 
         </footer>
+
     </div>
+
 </article>
 
-                <article class="post-card post tag-angular tag-ionic">
-        <a class="post-card-image-link" href="../injecting-providers-into-async-custom-validators-in-angular/index.html">
-            <div class="post-card-image" style="background-image: url(../content/images/2018/11/jantine-doornbos-398339-unsplash.jpg)"></div>
-        </a>
+                <article class="post-card post tag-angular tag-ionic ">
+
+    <a class="post-card-image-link" href="/injecting-providers-into-async-custom-validators-in-angular/">
+        <img class="post-card-image"
+            srcset="https://fdezromero.com/content/images/size/w300/2018/11/jantine-doornbos-398339-unsplash.jpg 300w,
+                    https://fdezromero.com/content/images/size/w600/2018/11/jantine-doornbos-398339-unsplash.jpg 600w,
+                    https://fdezromero.com/content/images/size/w1000/2018/11/jantine-doornbos-398339-unsplash.jpg 1000w,
+                    https://fdezromero.com/content/images/size/w2000/2018/11/jantine-doornbos-398339-unsplash.jpg 2000w"
+            sizes="(max-width: 1000px) 400px, 700px"
+            src="https://fdezromero.com/content/images/size/w600/2018/11/jantine-doornbos-398339-unsplash.jpg"
+            alt="Injecting Providers into Async Custom Validators in Angular"
+        />
+    </a>
+
     <div class="post-card-content">
-        <a class="post-card-content-link" href="../injecting-providers-into-async-custom-validators-in-angular/index.html">
+
+        <a class="post-card-content-link" href="/injecting-providers-into-async-custom-validators-in-angular/">
+
             <header class="post-card-header">
                     <span class="post-card-tags">Angular</span>
                 <h2 class="post-card-title">Injecting Providers into Async Custom Validators in Angular</h2>
             </header>
+
             <section class="post-card-excerpt">
                 <p>One of the first things developers do when we are building a new app is a signup form, that checks that every field is okay and shows an appropriate error message if it’s not.</p>
             </section>
+
         </a>
+
         <footer class="post-card-meta">
 
             <ul class="author-list">
@@ -519,14 +564,18 @@ export class AppComponent {
                         Rodrigo Fernández
                     </div>
 
-                        <a href="../author/rodrigo/index.html" class="static-avatar"><img class="author-profile-image" src="https://www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s=250&amp;d=mm&amp;r=x" alt="Rodrigo Fernández" /></a>
+                        <a href="/author/rodrigo/" class="static-avatar">
+                            <img class="author-profile-image" src="//www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Rodrigo Fernández" />
+                        </a>
                 </li>
             </ul>
 
             <span class="reading-time">2 min read</span>
 
         </footer>
+
     </div>
+
 </article>
 
         </div>
@@ -535,8 +584,8 @@ export class AppComponent {
 
 <div class="floating-header">
     <div class="floating-header-logo">
-        <a href="../index.html">
-                <img src="../content/images/2018/11/publication-icon.png" alt="Rodrigo Fernández icon" />
+        <a href="https://fdezromero.com">
+                <img src="https://fdezromero.com/content/images/size/w30/2018/11/publication-icon.png" alt="Rodrigo Fernández icon" />
             <span>Rodrigo Fernández</span>
         </a>
     </div>
@@ -568,11 +617,12 @@ export class AppComponent {
 
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="../index.html">Rodrigo Fernández</a> &copy; 2018</section>
+                <section class="copyright"><a href="https://fdezromero.com">Rodrigo Fernández</a> &copy; 2019</section>
                 <nav class="site-footer-nav">
-                    <a href="../index.html">Latest Posts</a>
+                    <a href="https://fdezromero.com">Latest Posts</a>
                     
                     <a href="https://twitter.com/FdezRomero" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
                 </nav>
             </div>
         </footer>
@@ -597,7 +647,7 @@ export class AppComponent {
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="../assets/built/jquery.fitvids.js%3Fv=9577a2cec2"></script>
+    <script type="text/javascript" src="/assets/built/jquery.fitvids.js?v=aa9bc082ca"></script>
 
 
     <script>

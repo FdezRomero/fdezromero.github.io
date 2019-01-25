@@ -9,12 +9,12 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=9577a2cec2.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css?v=aa9bc082ca" />
 
-    <link rel="shortcut icon" href="../favicon.png" type="image/png" />
-    <link rel="canonical" href="index.html" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://fdezromero.com/how-i-host-this-static-ghost-blog-on-github-pages-with-wget/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="amp/index.html" />
+    <link rel="amphtml" href="https://fdezromero.com/how-i-host-this-static-ghost-blog-on-github-pages-with-wget/amp/" />
     
     <meta property="og:site_name" content="Rodrigo Fernández" />
     <meta property="og:type" content="article" />
@@ -83,15 +83,15 @@
 }
     </script>
 
-    <script src="../public/ghost-sdk.js%3Fv=9577a2cec2"></script>
+    <script src="/public/ghost-sdk.js?v=aa9bc082ca"></script>
 <script>
 ghost.init({
 	clientId: "ghost-frontend",
 	clientSecret: "23eef7face45"
 });
 </script>
-    <meta name="generator" content="Ghost 2.6" />
-    <link rel="alternate" type="application/rss+xml" title="Rodrigo Fernández" href="../rss/index.html" />
+    <meta name="generator" content="Ghost 2.12" />
+    <link rel="alternate" type="application/rss+xml" title="Rodrigo Fernández" href="https://fdezromero.com/rss/" />
     <style type="text/css">
 /**
  * Prism One Dark Theme
@@ -286,12 +286,12 @@ pre.line-numbers > code {
     <div class="inner">
         <nav class="site-nav">
     <div class="site-nav-left">
-                <a class="site-nav-logo" href="../index.html"><img src="../content/images/2018/11/publication-logo.png" alt="Rodrigo Fernández" /></a>
+                <a class="site-nav-logo" href="https://fdezromero.com"><img src="https://fdezromero.com/content/images/2018/11/publication-logo.png" alt="Rodrigo Fernández" /></a>
             <ul class="nav" role="menu">
-    <li class="nav-home" role="menuitem"><a href="../index.html">Home</a></li>
-    <li class="nav-talks" role="menuitem"><a href="../talks/index.html">Talks</a></li>
-    <li class="nav-ionic" role="menuitem"><a href="../tag/ionic/index.html">Ionic</a></li>
-    <li class="nav-about-me" role="menuitem"><a href="../author/rodrigo/index.html">About me</a></li>
+    <li class="nav-home" role="menuitem"><a href="https://fdezromero.com/">Home</a></li>
+    <li class="nav-talks" role="menuitem"><a href="https://fdezromero.com/talks/">Talks</a></li>
+    <li class="nav-ionic" role="menuitem"><a href="https://fdezromero.com/tag/ionic/">Ionic</a></li>
+    <li class="nav-about-me" role="menuitem"><a href="https://fdezromero.com/author/rodrigo/">About me</a></li>
 </ul>
 
     </div>
@@ -316,12 +316,23 @@ pre.line-numbers > code {
             <header class="post-full-header">
                 <section class="post-full-meta">
                     <time class="post-full-meta-date" datetime="2018-11-19">19 November 2018</time>
-                        <span class="date-divider">/</span> <a href="../tag/web/index.html">Web</a>
+                        <span class="date-divider">/</span> <a href="/tag/web/">Web</a>
                 </section>
                 <h1 class="post-full-title">How I Host this Static Ghost Blog on Github Pages with wget</h1>
             </header>
 
-            <figure class="post-full-image" style="background-image: url(https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f)">
+            <figure class="post-full-image">
+                <img
+                    srcset="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f 300w,
+                            https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f 600w,
+                            https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f 1000w,
+                            https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f 2000w"
+                    sizes="(max-width: 800px) 400px,
+                            (max-width: 1170px) 700px,
+                            1400px"
+                    src="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib&#x3D;rb-0.3.5&amp;q&#x3D;80&amp;fm&#x3D;jpg&amp;crop&#x3D;entropy&amp;cs&#x3D;tinysrgb&amp;w&#x3D;1080&amp;fit&#x3D;max&amp;ixid&#x3D;eyJhcHBfaWQiOjExNzczfQ&amp;s&#x3D;89d7af25dada5ebfb09405ae87cf372f"
+                    alt="How I Host this Static Ghost Blog on Github Pages with wget"
+                />
             </figure>
 
             <section class="post-full-content">
@@ -374,14 +385,14 @@ git push master origin
 
                     
 <section class="author-card">
-        <img class="author-profile-image" src="https://www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s=250&amp;d=mm&amp;r=x" alt="Rodrigo Fernández" />
+        <img class="author-profile-image" src="//www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Rodrigo Fernández" />
     <section class="author-card-content">
-        <h4 class="author-card-name"><a href="../author/rodrigo/index.html">Rodrigo Fernández</a></h4>
-            <p>CTO &amp; Co-Founder at @SavelistCo. Making online shopping easier. #Fullstack #Javascript is my weapon of choice. #Ionic Madrid Co-organizer. #PWA #Angular #Nodejs</p>
+        <h4 class="author-card-name"><a href="/author/rodrigo/">Rodrigo Fernández</a></h4>
+            <p>CTO &amp; Co-Founder at @SavelistCo. @IonicFramework Contributor &amp; @IonicMadrid Co-organizer. #Fullstack #Javascript is my weapon of choice. #PWA #Angular #Nodejs</p>
     </section>
 </section>
 <div class="post-full-footer-right">
-    <a class="author-card-button" href="../author/rodrigo/index.html">Read More</a>
+    <a class="author-card-button" href="/author/rodrigo/">Read More</a>
 </div>
 
 
@@ -415,20 +426,35 @@ git push master origin
         <div class="read-next-feed">
 
 
-                <article class="post-card post tag-ionic">
-        <a class="post-card-image-link" href="../tips-and-tricks-for-ionic-on-desktop/index.html">
-            <div class="post-card-image" style="background-image: url(../content/images/2018/11/desktop-trick-img.jpg)"></div>
-        </a>
+                <article class="post-card post tag-ionic ">
+
+    <a class="post-card-image-link" href="/tips-and-tricks-for-ionic-on-desktop/">
+        <img class="post-card-image"
+            srcset="https://fdezromero.com/content/images/size/w300/2018/11/desktop-trick-img.jpg 300w,
+                    https://fdezromero.com/content/images/size/w600/2018/11/desktop-trick-img.jpg 600w,
+                    https://fdezromero.com/content/images/size/w1000/2018/11/desktop-trick-img.jpg 1000w,
+                    https://fdezromero.com/content/images/size/w2000/2018/11/desktop-trick-img.jpg 2000w"
+            sizes="(max-width: 1000px) 400px, 700px"
+            src="https://fdezromero.com/content/images/size/w600/2018/11/desktop-trick-img.jpg"
+            alt="Tips &amp; Tricks for Ionic on Desktop"
+        />
+    </a>
+
     <div class="post-card-content">
-        <a class="post-card-content-link" href="../tips-and-tricks-for-ionic-on-desktop/index.html">
+
+        <a class="post-card-content-link" href="/tips-and-tricks-for-ionic-on-desktop/">
+
             <header class="post-card-header">
                     <span class="post-card-tags">Ionic</span>
                 <h2 class="post-card-title">Tips &amp; Tricks for Ionic on Desktop</h2>
             </header>
+
             <section class="post-card-excerpt">
                 <p>In the process of customizing Savelist for larger screens, we collected some tips & tricks that we wanted to share that could help you adapt your app for the desktop, without compromising the mobile experience we already had.</p>
             </section>
+
         </a>
+
         <footer class="post-card-meta">
 
             <ul class="author-list">
@@ -438,14 +464,18 @@ git push master origin
                         Rodrigo Fernández
                     </div>
 
-                        <a href="../author/rodrigo/index.html" class="static-avatar"><img class="author-profile-image" src="https://www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s=250&amp;d=mm&amp;r=x" alt="Rodrigo Fernández" /></a>
+                        <a href="/author/rodrigo/" class="static-avatar">
+                            <img class="author-profile-image" src="//www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Rodrigo Fernández" />
+                        </a>
                 </li>
             </ul>
 
             <span class="reading-time">5 min read</span>
 
         </footer>
+
     </div>
+
 </article>
 
         </div>
@@ -454,8 +484,8 @@ git push master origin
 
 <div class="floating-header">
     <div class="floating-header-logo">
-        <a href="../index.html">
-                <img src="../content/images/2018/11/publication-icon.png" alt="Rodrigo Fernández icon" />
+        <a href="https://fdezromero.com">
+                <img src="https://fdezromero.com/content/images/size/w30/2018/11/publication-icon.png" alt="Rodrigo Fernández icon" />
             <span>Rodrigo Fernández</span>
         </a>
     </div>
@@ -487,11 +517,12 @@ git push master origin
 
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="../index.html">Rodrigo Fernández</a> &copy; 2018</section>
+                <section class="copyright"><a href="https://fdezromero.com">Rodrigo Fernández</a> &copy; 2019</section>
                 <nav class="site-footer-nav">
-                    <a href="../index.html">Latest Posts</a>
+                    <a href="https://fdezromero.com">Latest Posts</a>
                     
                     <a href="https://twitter.com/FdezRomero" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
                 </nav>
             </div>
         </footer>
@@ -516,7 +547,7 @@ git push master origin
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="../assets/built/jquery.fitvids.js%3Fv=9577a2cec2"></script>
+    <script type="text/javascript" src="/assets/built/jquery.fitvids.js?v=aa9bc082ca"></script>
 
 
     <script>
