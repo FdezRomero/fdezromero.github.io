@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>Tips &amp; Tricks for Ionic on Desktop</title>
+    <title>CORS Errors in Ionic Apps</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -18,27 +18,28 @@
     
     <meta property="og:site_name" content="Rodrigo Fernández" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Tips &amp; Tricks for Ionic on Desktop" />
-    <meta property="og:description" content="In the process of customizing Savelist for larger screens, we collected some tips &amp; tricks that we wanted to share that could help you adapt your app for the desktop, without compromising the mobile experience we already had." />
-    <meta property="og:url" content="https://fdezromero.com/tips-and-tricks-for-ionic-on-desktop/" />
-    <meta property="og:image" content="https://fdezromero.com/content/images/2018/11/desktop-trick-img.jpg" />
-    <meta property="article:published_time" content="2018-02-15T11:00:00.000Z" />
-    <meta property="article:modified_time" content="2018-11-20T18:10:15.000Z" />
+    <meta property="og:title" content="CORS Errors in Ionic Apps" />
+    <meta property="og:description" content="CORS errors are common in web apps when a cross-origin request is made but the server doesn&#x27;t return the required headers in the response. Learn how to fix them in this article." />
+    <meta property="og:url" content="https://fdezromero.com/cors-errors-in-ionic-apps/" />
+    <meta property="og:image" content="https://fdezromero.com/content/images/2019/02/cors-error.png" />
+    <meta property="article:published_time" content="2019-02-05T17:30:00.000Z" />
+    <meta property="article:modified_time" content="2019-02-05T18:08:59.000Z" />
     <meta property="article:tag" content="Ionic" />
+    <meta property="article:tag" content="Web" />
     
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tips &amp; Tricks for Ionic on Desktop" />
-    <meta name="twitter:description" content="In the process of customizing Savelist for larger screens, we collected some tips &amp; tricks that we wanted to share that could help you adapt your app for the desktop, without compromising the mobile experience we already had." />
-    <meta name="twitter:url" content="https://fdezromero.com/tips-and-tricks-for-ionic-on-desktop/" />
-    <meta name="twitter:image" content="https://fdezromero.com/content/images/2018/11/desktop-trick-img.jpg" />
+    <meta name="twitter:title" content="CORS Errors in Ionic Apps" />
+    <meta name="twitter:description" content="CORS errors are common in web apps when a cross-origin request is made but the server doesn&#x27;t return the required headers in the response. Learn how to fix them in this article." />
+    <meta name="twitter:url" content="https://fdezromero.com/cors-errors-in-ionic-apps/" />
+    <meta name="twitter:image" content="https://fdezromero.com/content/images/2019/02/cors-error.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Rodrigo Fernández" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Ionic" />
+    <meta name="twitter:data2" content="Ionic, Web" />
     <meta name="twitter:site" content="@FdezRomero" />
     <meta name="twitter:creator" content="@FdezRomero" />
-    <meta property="og:image:width" content="1400" />
-    <meta property="og:image:height" content="680" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="420" />
     
     <script type="application/ld+json">
 {
@@ -64,18 +65,18 @@
             "https://twitter.com/FdezRomero"
         ]
     },
-    "headline": "Tips &amp; Tricks for Ionic on Desktop",
-    "url": "https://fdezromero.com/tips-and-tricks-for-ionic-on-desktop/",
-    "datePublished": "2018-02-15T11:00:00.000Z",
-    "dateModified": "2018-11-20T18:10:15.000Z",
+    "headline": "CORS Errors in Ionic Apps",
+    "url": "https://fdezromero.com/cors-errors-in-ionic-apps/",
+    "datePublished": "2019-02-05T17:30:00.000Z",
+    "dateModified": "2019-02-05T18:08:59.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "https://fdezromero.com/content/images/2018/11/desktop-trick-img.jpg",
-        "width": 1400,
-        "height": 680
+        "url": "https://fdezromero.com/content/images/2019/02/cors-error.png",
+        "width": 1600,
+        "height": 420
     },
-    "keywords": "Ionic",
-    "description": "In the process of customizing Savelist for larger screens, we collected some tips &amp; tricks that we wanted to share that could help you adapt your app for the desktop, without compromising the mobile experience we already had.",
+    "keywords": "Ionic, Web",
+    "description": "CORS errors are common in web apps when a cross-origin request is made but the server doesn&#x27;t return the required headers in the response. Learn how to fix them in this article.",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://fdezromero.com/"
@@ -276,7 +277,7 @@ pre.line-numbers > code {
 </script>
 
 </head>
-<body class="post-template tag-ionic">
+<body class="post-template tag-ionic tag-web">
 
     <div class="site-wrapper">
 
@@ -311,102 +312,282 @@ pre.line-numbers > code {
 <main id="site-main" class="site-main outer">
     <div class="inner">
 
-        <article class="post-full post tag-ionic ">
+        <article class="post-full post tag-ionic tag-web ">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="2018-02-15">15 February 2018</time>
+                    <time class="post-full-meta-date" datetime="2019-02-05">5 February 2019</time>
                         <span class="date-divider">/</span> <a href="../tag/ionic/">Ionic</a>
                 </section>
-                <h1 class="post-full-title">Tips &amp; Tricks for Ionic on Desktop</h1>
+                <h1 class="post-full-title">CORS Errors in Ionic Apps</h1>
             </header>
 
             <figure class="post-full-image">
                 <img
-                    srcset="../content/images/size/w300/2018/11/desktop-trick-img.jpg 300w,
-                           ../content/images/size/w600/2018/11/desktop-trick-img.jpg 600w,
-                          ../content/images/size/w1000/2018/11/desktop-trick-img.jpg 1000w,
-                         ../content/images/size/w2000/2018/11/desktop-trick-img.jpg 2000w"
+                    srcset="../content/images/size/w300/2019/02/cors-error.png 300w,
+                           ../content/images/size/w600/2019/02/cors-error.pngg 600w,
+                          ../content/images/size/w1000/2019/02/cors-error.pngng 1000w,
+                         ../content/images/size/w2000/2019/02/cors-error.pngpng 2000w"
                     sizes="(max-width: 800px) 400px,
                             (max-width: 1170px) 700px,
                             1400px"
-                    src="../content/images/size/w2000/2018/11/desktop-trick-img.jpg"
-                    alt="Tips &amp; Tricks for Ionic on Desktop"
+                    src="../content/images/size/w2000/2019/02/cors-error.png"
+                    alt="CORS Errors in Ionic Apps"
                 />
             </figure>
 
             <section class="post-full-content">
                 <div class="post-content">
-                    <p><em>Originally published in <a href="https://blog.ionicframework.com/tips-tricks-for-ionic-on-desktop/">The Official Ionic Blog</a>.</em></p><p>We have been using Ionic at <a href="http://savelist.co/" rel="noopener">Savelist</a> since the first alpha versions, and always thought that one of its strongest benefits is the ability to code an app for iOS, Android and the Web with a single codebase. Heck, we even use Ionic to build our browser extensions!</p><p>When we went through the process of launching the Savelist Progressive Web App in January (2017), we noticed that even though it looked as expected on mobile – as we started with a “mobile first” approach – it didn’t look quite right on the larger displays of laptops and desktops. Navigation bars and content were too wide and since most content was aligned to the left, there was too much white space on the right of almost all our screens. It felt more like the maximized version of our Android app than a website.</p><p>In the process of customizing Savelist for larger screens, we collected some tips &amp; tricks that we wanted to share that could help you adapt your app for the desktop, without compromising the mobile experience we already had.</p><p>This guide is based on the latest release of <code>ionic-angular</code> at the time (3.9.2). If you’re using an older version of Ionic, I strongly recommend you to update to the latest release.</p><h3 id="setting-up-the-fixed-grid">Setting up the fixed grid</h3><p>Ionic has a great grid system based on flexbox that we can use to adapt content and make it responsive. It’s incredibly customizable, and we can define custom grid widths and breakpoints for every resolution.</p><p>First, we limited the grid width in order to make the content easier to navigate. For our needs, all we had to do was removed the <code>xl</code> breakpoint. Ionic handles this without any issues.</p><p>In our <code>src/theme/variables.scss</code>:</p><pre><code class="language-scss">$grid-breakpoints: (
- xs: 0, // Phone (0px - 575px)
- sm: 576px, // Phablet (576px - 767px)
- md: 768px, // Tablet vertical (768px - 991px)
- lg: 992px // Tablet horizontal, Desktop (992px and above)
-);
+                    <h2 id="whatiscors">What is CORS?</h2>
+<p><strong>Cross-Origin Resource Sharing (CORS)</strong> is a mechanism that browsers and webviews — like the ones powering Capacitor and Cordova — use to restrict HTTP and HTTPS requests made from scripts to resources in a different origin for security reasons, mainly to protect your user's data and prevent attacks that would compromise your app.</p>
+<p>In order to know if an external origin supports CORS, the server has to send some <a href="#cors-headers">special headers</a> for the browser to allow the requests.</p>
+<p>An <strong>origin</strong> is the combination of the <strong>protocol</strong>, <strong>domain</strong>, and <strong>port</strong> from which your Ionic app or the external resource is served. For example, apps running in Capacitor have <code>capacitor://localhost</code> (iOS) or <code>http://localhost</code> (Android) as their origin, and Cordova apps may run from <code>http://localhost:8080</code> or the <code>file://</code> protocol.</p>
+<p>When the origin of your app (e.g. <code>https://localhost:8080</code>) and the origin of the resource being requested (e.g. <code>https://api.example.com</code>) don't match, the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener">Same Origin Policy</a> takes effect and CORS is required for the request to be made.</p>
+<p>CORS errors are common in web apps when a cross-origin request is made but the server doesn't return the required headers in the response (is not CORS-enabled):</p>
+<pre><code>XMLHttpRequest cannot load https://api.example.com.
+No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Origin 'http://localhost:8080' is therefore not allowed access.
 </code></pre>
-<p>Next we modified the <code>$grid-max-widths</code> variable and made our app use 100% of the width until it reaches 992px:</p><pre><code class="language-scss">$grid-max-widths: (
- lg: 992px
-);
+<h2 id="howdoescorswork">How does CORS work</h2>
+<h3 id="requestwithpreflight">Request with preflight</h3>
+<p>By default, when a web app tries to make a cross-origin request the browser sends a <strong>preflight request</strong> before the actual request. This preflight request is needed in order to know if the external resource supports CORS and if the actual request can be sent safely, since it may impact user data.</p>
+<p>A preflight request is sent by the browser if:</p>
+<ul>
+<li><strong>The method is:</strong>
+<ul>
+<li>PUT</li>
+<li>DELETE</li>
+<li>CONNECT</li>
+<li>OPTIONS</li>
+<li>TRACE</li>
+<li>PATCH</li>
+</ul>
+</li>
+<li><strong>Or if it has a header other than:</strong>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type</li>
+<li>DPR</li>
+<li>Downlink</li>
+<li>Save-Data</li>
+<li>Viewport-Width</li>
+<li>Width</li>
+</ul>
+</li>
+<li><strong>Or if it has a <code>Content-Type</code> header other than:</strong>
+<ul>
+<li>application/x-www-form-urlencoded</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ul>
+</li>
+<li>Or if a <code>ReadableStream</code> or event listeners in <code>XMLHttpRequestUpload</code> are used.</li>
+</ul>
+<p>If any of the conditions above are met, a preflight request with the <code>OPTIONS</code> method is sent to the resource URL.</p>
+<p>Let's suppose we are making a <code>POST</code> request to a fictional JSON API at <code>https://api.example.com</code> with a <code>Content-Type</code> of <code>application/json</code>. The preflight request would be like this (some default headers omitted for clarity):</p>
+<pre><code class="language-http">OPTIONS / HTTP/1.1
+Host: api.example.com
+Origin: http://localhost:8080
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: Content-Type
 </code></pre>
-<p>You could use any other size you’d want for this, as long as the value <code>lg</code>from <code>$grid-breakpoints</code> matches.</p><h3 id="using-the-fixed-grid-on-pages">Using the fixed grid on pages</h3><p>In order to apply a max-width to our pages, we just wrap the markup inside <code>&lt;ion-content&gt;</code> with <code>&lt;ion-grid fixed&gt;</code>. The <code>fixed</code> attribute tells Ionic’s grid to use the max-width corresponding to the current breakpoint, or 100% if not defined.</p><p>So this code:</p><pre><code class="language-html">&lt;ion-content&gt;
- &lt;!-- Some code --&gt;
-&lt;/ion-content&gt;
+<p>If the server is CORS enabled, it will parse the <code>Access-Control-Request-*</code> headers and understand that a <code>POST</code> request is trying to be made from <code>http://localhost:8080</code> with a custom <code>Content-Type</code>.</p>
+<p>The server will then respond to this preflight with which origins, methods, and headers are allowed by using the <code>Access-Control-Allow-*</code> headers:</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:8080
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Headers: Content-Type
 </code></pre>
-<p>Becomes:</p><pre><code class="language-html">&lt;ion-content&gt;
- &lt;ion-grid fixed&gt;
-   &lt;!-- Some code --&gt;
- &lt;/ion-grid&gt;
-&lt;/ion-content&gt;
+<p>If the returned origin and method don't match the ones from the actual request, or any of the headers used are not allowed, the request will be blocked by the browser and an error will be shown in the console. Otherwise, the request will be made after the preflight.</p>
+<p>In our example, since the API expects JSON, all <code>POST</code> requests will have a <code>Content-Type: application/json</code> header and always be preflighted.</p>
+<h3 id="simplerequests">Simple requests</h3>
+<p>Some requests are always considered safe to send and don't need a preflight if they meet all of the following conditions:</p>
+<ul>
+<li><strong>The method is:</strong>
+<ul>
+<li>GET</li>
+<li>HEAD</li>
+<li>POST</li>
+</ul>
+</li>
+<li><strong>Have only these headers:</strong>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type</li>
+<li>DPR</li>
+<li>Downlink</li>
+<li>Save-Data</li>
+<li>Viewport-Width</li>
+<li>Width</li>
+</ul>
+</li>
+<li><strong>The <code>Content-Type</code> header is:</strong>
+<ul>
+<li>application/x-www-form-urlencoded</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ul>
+</li>
+<li>No <code>ReadableStream</code> or event listeners in <code>XMLHttpRequestUpload</code> are used.</li>
+</ul>
+<p>In our example API, <code>GET</code> requests don't need to be preflighted because no JSON data is being sent, and so the app doesn't need to use the <code>Content-Type: application/json</code> header. They will always be simple requests.</p>
+<h2 id="corsheaders">CORS Headers</h2>
+<h3 id="serverheadersresponse">Server Headers (Response)</h3>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Access-Control-Allow-Origin</strong></td>
+<td><code>origin</code> or <code>*</code></td>
+<td>Specifies the origin to be allowed, like <code>http://localhost:8080</code> or <code>*</code> to allow all origins.</td>
+</tr>
+<tr>
+<td><strong>Access-Control-Allow-Methods</strong></td>
+<td><code>methods</code></td>
+<td>Which methods are allowed when accessing the resource: <code>GET</code>, <code>HEAD</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>, <code>CONNECT</code>, <code>OPTIONS</code>, <code>TRACE</code>, <code>PATCH</code>.</td>
+</tr>
+<tr>
+<td><strong>Access-Control-Allow-Headers</strong></td>
+<td><code>headers</code></td>
+<td>Used in response to a preflight request to indicate which headers can be used when making the actual request, aside from the <a href="#simple-requests">simple headers</a>, which are always allowed.</td>
+</tr>
+<tr>
+<td>Access-Control-Allow-Credentials</td>
+<td><code>true</code> or <code>false</code></td>
+<td>Whether or not the request can be made with credentials.</td>
+</tr>
+<tr>
+<td>Access-Control-Expose-Headers</td>
+<td><code>headers</code></td>
+<td>Whitelists the headers that the browser is allowed to access.</td>
+</tr>
+<tr>
+<td>Access-Control-Max-Age</td>
+<td><code>seconds</code></td>
+<td>Indicates how long the results of a preflight request can be cached.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="browserheadersrequest">Browser Headers (Request)</h3>
+<p>The browser automatically sends the appropriate headers for CORS in every request to the server, including the preflight requests. Please note that the headers below are for reference only, and <strong>should not be set in your app code</strong> (the browser will ignore them).</p>
+<h4 id="allrequests">All Requests</h4>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Origin</strong></td>
+<td><code>origin</code></td>
+<td>Indicates the origin of the request.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="preflightrequests">Preflight Requests</h4>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Access-Control-Request-Method</strong></td>
+<td><code>method</code></td>
+<td>Used to let the server know what method will be used when the actual request is made.</td>
+</tr>
+<tr>
+<td>Access-Control-Request-Headers</td>
+<td><code>headers</code></td>
+<td>Used to let the server know what non-simple headers will be used when the actual request is made.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="solutionsforcorserrors">Solutions for CORS Errors</h2>
+<h3 id="aenablingcorsinaserveryoucontrol">A. Enabling CORS in a server you control</h3>
+<p>The correct and easiest solution is to enable CORS by returning the <a href="#server-headers-response-">right response headers</a> from the web server or backend and responding to preflight requests, as it allows to keep using <code>XMLHttpRequest</code>, <code>fetch</code>, or abstractions like <code>HttpClient</code> in Angular.</p>
+<p>These are the recommended <code>Access-Control-Allow-Origin</code> headers for Ionic apps. Please note that these headers have to be sent from the server, and don't belong in your app code.</p>
+<p><strong>Capacitor</strong></p>
+<pre><code class="language-http">Access-Control-Allow-Origin: capacitor://localhost, http://localhost
 </code></pre>
-<p>We don’t need to apply this to pages that are displayed inside modals or popovers, as they already have a fixed width.</p><h3 id="horizontally-center-the-header-footer-toolbars">Horizontally center the header &amp; footer toolbars</h3><p>We have better looking pages now, but the toolbars inside <code>&lt;ion-header&gt;</code> and <code>&lt;ion-footer&gt;</code> are not horizontally aligned. We can easily adjust them to match of our fixed-width pages by adding these rules at the end of <code>app.scss</code>:</p><pre><code class="language-scss">// Desktop
+<p><em>Replace <code>localhost</code> with your own hostname if you have changed the default in the Capacitor config.</em></p>
+<p><strong>Ionic WebView plugin on Cordova</strong></p>
+<pre><code class="language-http">Access-Control-Allow-Origin: http://localhost:8080
+</code></pre>
+<p><em>Replace port <code>8080</code> with your own if you have changed the default in the plugin config.</em></p>
+<p><strong>Ionic Serve for local development</strong></p>
+<pre><code class="language-http">Access-Control-Allow-Origin: http://localhost:8100
+</code></pre>
+<p>Allowing any origin with <code>Access-Control-Allow-Origin: *</code> is guaranteed to work in all scenarios but may have security implications — like some CSRF attacks — depending on how the server controls access to resources and use sessions and cookies.</p>
+<p>For more information on how to enable CORS in different web and app servers, please check <a href="https://enable-cors.org" target="_blank" rel="noopener">enable-cors.org</a></p>
+<p>In Express-compatible Node.js apps, CORS can be easily enabled with the <a href="https://github.com/expressjs/cors" target="_blank" rel="noopener">cors</a> package.</p>
+<h3 id="bworkingaroundcorsinaserveryoucantcontrol">B. Working around CORS in a server you can't control</h3>
+<h4 id="dontleakyourkeys">Don't leak your keys!</h4>
+<p>If you are trying to connect to a 3rd-party API, first check in its documentation that is safe to use it directly from the app (client-side) and that it won't leak any secret/private keys or credentials, as it's easy to see them in clear text in Javascript code. Many APIs don't support CORS on purpose, in order to force developers to use them in the server and protect important information or keys.</p>
+<h4 id="1nativeonlyappsiosandroid">1. Native-only apps (iOS/Android)</h4>
+<p>Use the <a href="https://fdezromero.com/docs/native/http/" target="_blank" rel="noopener">HTTP plugin from Ionic Native</a> to make the requests natively from outside the webview. Please note that this plugin doesn't work in the browser, so the development and testing of the app must always be done in a device or simulator going forward.</p>
+<p><strong>Usage in Ionic Angular 4</strong></p>
+<pre><code class="language-typescript">import { Component } from '@angular/core';
+import { HTTP } from '@ionic-native/http/ngx';
 
-ion-header .toolbar {
- margin: auto;
-}
-
-@media (min-width: map-get($grid-breakpoints, lg)) {
- ion-navbar.toolbar,
- ion-header .toolbar[fixed],
- ion-footer .toolbar[fixed],
- ion-tabs .tabbar {
-   margin: 0;
-   padding-right: calc((100% - #{map-get($grid-max-widths, lg)}) / 2);
-   padding-left: calc((100% - #{map-get($grid-max-widths, lg)}) / 2);
- }
-}
-</code></pre>
-<p>If there is any <code>&lt;ion-toolbar&gt;</code> inside <code>&lt;ion-header&gt;</code> or <code>&lt;ion-footer&gt;</code>, you may want to add the <code>fixed</code> attribute to center them, like <code>&lt;ion-toolbar fixed&gt;</code>.</p><h3 id="showing-tabs-at-the-top">Showing tabs at the top</h3><p>While users are used to having tabs at the bottom in mobile apps, desktop webs usually show them at the top for better usability and navigation. Well known apps like Twitter, Pinterest and Instagram all use tabs at the top for their desktop experience.</p><p>Fortunately, Ionic Framework allows us to easily customize the position and layout of the tabs, so we can have bottom tabs with icons on top in our mobile experience:</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image.png" class="kg-image"></figure><p>And top tabs with icons on the left for our desktop experience:</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image-1.png" class="kg-image"></figure><p>To achieve this we can bind class properties to the <code>tabsPlacement</code> and <code>tabsLayout</code> attributes of our <code>&lt;ion-tabs&gt;</code>:</p><pre><code class="language-html">&lt;ion-tabs [tabsPlacement]=&quot;tabsPlacement&quot; [tabsLayout]=&quot;tabsLayout&quot;&gt;
-    &lt;!-- Tabs here --&gt;
-&lt;ion-tabs&gt;
-</code></pre>
-<p>And set the values depending on the platform:</p><pre><code class="language-ts">@Component({
-  templateUrl: 'app.html'
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class AppComponent {
-  tabsPlacement: string = 'bottom';
-  tabsLayout: string = 'icon-top';
+export class HomePage {
+  constructor(private http: HTTP) {}
 
-  constructor(
-    public platform: Platform,
-  ) {
-    if (!this.platform.is('mobile')) {
-      this.tabsPlacement = 'top';
-      this.tabsLayout = 'icon-left';
+  async getData() {
+    try {
+      const url = 'https://api.example.com';
+      const params = {};
+      const headers = {};
+
+      const response = await this.http.get(url, params, headers);
+
+      console.log(response.status);
+      console.log(JSON.parse(response.data)); // JSON data returned by server
+      console.log(response.headers);
+
+    } catch (error) {
+      console.error(error.status);
+      console.error(error.error); // Error message as string
+      console.error(error.headers);
     }
   }
 }
 </code></pre>
-<p>You can check the different placement and layout options in the <a href="https://ionicframework.com/docs/api/components/tabs/Tabs/">Tabs docs</a>.</p><h3 id="using-the-responsive-grid-and-breakpoints">Using the responsive grid and breakpoints</h3><p>One of Savelist’s key features is the ability to show all the products you have saved from the web in a clear and organized layout, so cards in a responsive grid was the best way to go in displaying that information.</p><p>This option lets you have one or two cards per row on mobile, and more cards as the screen gets bigger. Cards don’t have a fixed width and make the best use of the available space.</p><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image-2.png" class="kg-image"><figcaption>Mobile</figcaption></figure><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image-3.png" class="kg-image"><figcaption>Tablet</figcaption></figure><figure class="kg-card kg-image-card"><img src="../content/images/2018/11/image-4.png" class="kg-image"><figcaption>Desktop</figcaption></figure><p>It’s easy to achieve this layout with the help of the grid breakpoints we set up before and <code>col-{breakpoint}-{#}</code>:</p><pre><code class="language-html">&lt;ion-grid fixed&gt;
- &lt;ion-row&gt;
-   &lt;ion-card ion-col *ngFor=&quot;let product of products&quot; col-6 col-md-4 col-lg-3&gt;&lt;/ion-card&gt;
- &lt;/ion-row&gt;
-&lt;/ion-grid&gt;
-</code></pre>
-<p>Rows will start with 2 cards on <code>xs</code> and <code>sm</code>, 3 cards on <code>md</code> and 4 cards on <code>lg</code> and above.</p><h3 id="adapting-the-experience">Adapting the experience</h3><p>We have addressed the biggest points of adapting the PWA “app shell” to big screens. However, you may still notice some items that you want to show differently, like font size, images, UI, etc.</p><p>There is no silver bullet for this, but you can achieve almost anything you want starting with this media query, so if you ever change the <code>lg</code> breakpoint the media query will update as well:</p><pre><code class="language-scss">@media (min-width: map-get($grid-breakpoints, lg)) {
- // Your rules here
-}
-</code></pre>
-<p>Another way is to show or hide elements according to the platform type instead of the screen size with <code>showWhen</code> and <code>hideWhen</code>. You can use the value <code>core</code> to target desktops.</p><hr><h3 id="share-your-tricks-">Share your tricks!</h3><p>This was just a few of the changes we made to Savelist in order to look better on larger screens, but I’m sure there’s more ideas out there. I’d love to know what tricks you have in your bag with working with Ionic, so leave a comment below!</p>
+<h4 id="2nativepwas">2. Native + PWAs</h4>
+<p>Send the requests through an HTTP/HTTPS proxy that bypasses them to the external resources and adds the necessary CORS headers to the responses. This proxy must be trusted or under your control, as it will be intercepting most traffic made by the app.</p>
+<p>Also, keep in mind that the browser or webview will not receive the original HTTPS certificates but the one being sent from the proxy if provided. URLs may need to be rewritten in your code in order to use the proxy.</p>
+<p>Check <a href="https://github.com/Rob--W/cors-anywhere/" target="_blank" rel="noopener">cors-anywhere</a> for a Node.js CORS proxy that can be deployed in your own server. Using free hosted CORS proxies in production is not recommended.</p>
+<h3 id="cdisablingcorsorbrowserwebsecurity">C. Disabling CORS or browser web security</h3>
+<p>Please be aware that CORS exists for a reason (security of user data and to prevent attacks against your app). <strong>It's not possible or advisable to try to disable CORS</strong>.</p>
+<p>Older webviews like <code>UIWebView</code> on iOS don't enforce CORS but are deprecated and are very likely to disappear soon. Modern webviews like iOS <code>WKWebView</code> or Android <code>WebView</code> (both used by Capacitor) do enforce CORS and provide huge security and performance improvements.</p>
+<p>If you are developing a PWA or testing in the browser, using the <code>--disable-web-security</code> flag in Google Chrome or an extension to disable CORS is a really bad idea. You will be exposed to all kind of attacks, you can't ask your users to take the risk, and your app won't work once in production.</p>
+<hr>
+<p><strong>Sources</strong></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank" rel="noopener">MDN</a></li>
+</ul>
+
                 </div>
             </section>
 
@@ -434,7 +615,7 @@ export class AppComponent {
                 <script>
                     var disqus_config = function () {
                         this.page.url = 'https://fdezromero.com';
-                        this.page.identifier = 'ghost-5bf44b2b00458904fdb03c87';
+                        this.page.identifier = 'ghost-5c59c7b823af6334c2751b47';
                     };
 
                     (function () {
@@ -466,7 +647,7 @@ export class AppComponent {
 </div>
                     <div class="read-next-card-content">
                         <ul>
-                            <li><a href="../cors-errors-in-ionic-apps/">CORS Errors in Ionic Apps</a></li>
+                            <li><a href="../tips-and-tricks-for-ionic-on-desktop/">Tips &amp; Tricks for Ionic on Desktop</a></li>
                             <li><a href="../injecting-providers-into-async-custom-validators-in-angular/">Injecting Providers into Async Custom Validators in Angular</a></li>
                         </ul>
                     </div>
@@ -474,6 +655,7 @@ export class AppComponent {
                         <a href="../tag/ionic/">See all 2 posts →</a>
                     </footer>
                 </article>
+
 
                 <article class="post-card post tag-web ">
 
@@ -527,58 +709,6 @@ export class AppComponent {
 
 </article>
 
-                <article class="post-card post tag-angular tag-ionic ">
-
-    <a class="post-card-image-link" href="../injecting-providers-into-async-custom-validators-in-angular/">
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2018/11/jantine-doornbos-398339-unsplash.jpg 300w,
-                   ../content/images/size/w600/2018/11/jantine-doornbos-398339-unsplash.jpg 600w,
-                  ../content/images/size/w1000/2018/11/jantine-doornbos-398339-unsplash.jpg 1000w,
-                 ../content/images/size/w2000/2018/11/jantine-doornbos-398339-unsplash.jpg 2000w"
-            sizes="(max-width: 1000px) 400px, 700px"
-            src="../content/images/size/w600/2018/11/jantine-doornbos-398339-unsplash.jpg"
-            alt="Injecting Providers into Async Custom Validators in Angular"
-        />
-    </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../injecting-providers-into-async-custom-validators-in-angular/">
-
-            <header class="post-card-header">
-                    <span class="post-card-tags">Angular</span>
-                <h2 class="post-card-title">Injecting Providers into Async Custom Validators in Angular</h2>
-            </header>
-
-            <section class="post-card-excerpt">
-                <p>One of the first things developers do when we are building a new app is a signup form, that checks that every field is okay and shows an appropriate error message if it’s not.</p>
-            </section>
-
-        </a>
-
-        <footer class="post-card-meta">
-
-            <ul class="author-list">
-                <li class="author-list-item">
-
-                    <div class="author-name-tooltip">
-                        Rodrigo Fernández
-                    </div>
-
-                        <a href="../author/rodrigo/" class="static-avatar">
-                            <img class="author-profile-image" src="https://www.gravatar.com/avatar/3f5e2c1bb78a56f68f8c04ee09acccac?s=250&amp;d=mm&amp;r=x" alt="Rodrigo Fernández" />
-                        </a>
-                </li>
-            </ul>
-
-            <span class="reading-time">2 min read</span>
-
-        </footer>
-
-    </div>
-
-</article>
-
         </div>
     </div>
 </aside>
@@ -591,17 +721,17 @@ export class AppComponent {
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">Tips &amp; Tricks for Ionic on Desktop</div>
+    <div class="floating-header-title">CORS Errors in Ionic Apps</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Tips%20%26%20Tricks%20for%20Ionic%20on%20Desktop&amp;url=https://fdezromero.com/tips-and-tricks-for-ionic-on-desktop/"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=CORS%20Errors%20in%20Ionic%20Apps&amp;url=https://fdezromero.com/cors-errors-in-ionic-apps/"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://fdezromero.com/tips-and-tricks-for-ionic-on-desktop/"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://fdezromero.com/cors-errors-in-ionic-apps/"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
         </a>

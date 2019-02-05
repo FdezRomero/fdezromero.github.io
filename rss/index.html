@@ -1,4 +1,253 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Rodrigo Fernández]]></title><description><![CDATA[Full-stack Javascript, Ionic & Startups]]></description><link>https://fdezromero.com/</link><image><url>https://fdezromero.com/favicon.png</url><title>Rodrigo Fernández</title><link>https://fdezromero.com/</link></image><generator>Ghost 2.12</generator><lastBuildDate>Fri, 25 Jan 2019 13:30:06 GMT</lastBuildDate><atom:link href="https://fdezromero.com/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[How I Host this Static Ghost Blog on Github Pages with wget]]></title><description><![CDATA[Generating a static site from a local Ghost blog with wget instead of Buster and hosting it at GitHub Pages.]]></description><link>https://fdezromero.com/how-i-host-this-static-ghost-blog-on-github-pages-with-wget/</link><guid isPermaLink="false">5bf2dae9d5546074beaea791</guid><category><![CDATA[Web]]></category><dc:creator><![CDATA[Rodrigo Fernández]]></dc:creator><pubDate>Mon, 19 Nov 2018 17:19:17 GMT</pubDate><media:content url="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=89d7af25dada5ebfb09405ae87cf372f" medium="image"/><content:encoded><![CDATA[<img src="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=89d7af25dada5ebfb09405ae87cf372f" alt="How I Host this Static Ghost Blog on Github Pages with wget"><p>Lately I've been wanting to go back to writing more on my personal blog, so I'm currently in the process of gathering articles, slides, videos and code samples I wrote on various platforms.</p><p>Initially I wanted to write articles and pages in Markdown, generate some static blog pages from them, push to a repository, and host them in GitHub Pages. I tried several approaches, including building my blog off the <a href="https://github.com/ionic-team/stencil-site">great Stencil site generator</a>. But then decided that I didn't want to deal too much with templates and design, or I would spend more time coding and I'd never get to writing 😙</p><p>Coming from Medium, I liked Ghost's design and simplicity the most. Keeping another Node.js server with NGNIX and MySQL, backups and so on, not so much 😅. I found some middle ground installing Ghost locally (with the database in a SQLite file I can commit to a repo) and generating a static site with all the articles and pages.</p><p>I found many how-to's using Buster, a Python tool that automates the process of grabbing every page generating the site. The problem is that I soon noticed that the tool is no longer maintained and many things have changed in Ghost after it was last updated, so the result is essentially broken. I spent the rest of the day trying all the other forks with different results: some fixed some things and others fixed some other things. Either links were still pointing to localhost or pages were missing.</p><p>Then I remembered that the fantastic <code>wget</code> command has some backup and mirroring features, which Buster were also using under the hood. So I wrote a very simple bash script to automate the static generation process.</p><p>Here are the steps I followed to set up this blog. If you have a local Ghost installation, you can skip ahead to the script.</p><hr><h3 id="installing-ghost-locally">Installing Ghost locally</h3><p>To <a href="https://docs.ghost.org/install/local/">install Ghost locally</a> you will need the following:</p><ul><li>A supported version of <strong>Node.js</strong></li><li><strong>npm</strong> or <strong>yarn</strong> to manage packages</li><li>A clean, empty directory on your machine</li></ul><p>Ghost has a nice CLI tool we can install globally to handle multiple blogs:</p><pre><code class="language-bash">npm install -g ghost-cli
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Rodrigo Fernández]]></title><description><![CDATA[Full-stack Javascript, Ionic & Startups]]></description><link>https://fdezromero.com/</link><image><url>https://fdezromero.com/favicon.png</url><title>Rodrigo Fernández</title><link>https://fdezromero.com/</link></image><generator>Ghost 2.12</generator><lastBuildDate>Tue, 05 Feb 2019 18:11:52 GMT</lastBuildDate><atom:link href="https://fdezromero.com/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[CORS Errors in Ionic Apps]]></title><description><![CDATA[CORS errors are common in web apps when a cross-origin request is made but the server doesn't return the required headers in the response. Learn how to fix them in this article.]]></description><link>https://fdezromero.com/cors-errors-in-ionic-apps/</link><guid isPermaLink="false">5c59c7b823af6334c2751b47</guid><category><![CDATA[Ionic]]></category><category><![CDATA[Web]]></category><dc:creator><![CDATA[Rodrigo Fernández]]></dc:creator><pubDate>Tue, 05 Feb 2019 17:30:00 GMT</pubDate><media:content url="https://fdezromero.com/content/images/2019/02/cors-error.png" medium="image"/><content:encoded><![CDATA[<h2 id="whatiscors">What is CORS?</h2>
+<img src="https://fdezromero.com/content/images/2019/02/cors-error.png" alt="CORS Errors in Ionic Apps"><p><strong>Cross-Origin Resource Sharing (CORS)</strong> is a mechanism that browsers and webviews — like the ones powering Capacitor and Cordova — use to restrict HTTP and HTTPS requests made from scripts to resources in a different origin for security reasons, mainly to protect your user's data and prevent attacks that would compromise your app.</p>
+<p>In order to know if an external origin supports CORS, the server has to send some <a href="#cors-headers">special headers</a> for the browser to allow the requests.</p>
+<p>An <strong>origin</strong> is the combination of the <strong>protocol</strong>, <strong>domain</strong>, and <strong>port</strong> from which your Ionic app or the external resource is served. For example, apps running in Capacitor have <code>capacitor://localhost</code> (iOS) or <code>http://localhost</code> (Android) as their origin, and Cordova apps may run from <code>http://localhost:8080</code> or the <code>file://</code> protocol.</p>
+<p>When the origin of your app (e.g. <code>https://localhost:8080</code>) and the origin of the resource being requested (e.g. <code>https://api.example.com</code>) don't match, the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener">Same Origin Policy</a> takes effect and CORS is required for the request to be made.</p>
+<p>CORS errors are common in web apps when a cross-origin request is made but the server doesn't return the required headers in the response (is not CORS-enabled):</p>
+<pre><code>XMLHttpRequest cannot load https://api.example.com.
+No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Origin 'http://localhost:8080' is therefore not allowed access.
+</code></pre>
+<h2 id="howdoescorswork">How does CORS work</h2>
+<h3 id="requestwithpreflight">Request with preflight</h3>
+<p>By default, when a web app tries to make a cross-origin request the browser sends a <strong>preflight request</strong> before the actual request. This preflight request is needed in order to know if the external resource supports CORS and if the actual request can be sent safely, since it may impact user data.</p>
+<p>A preflight request is sent by the browser if:</p>
+<ul>
+<li><strong>The method is:</strong>
+<ul>
+<li>PUT</li>
+<li>DELETE</li>
+<li>CONNECT</li>
+<li>OPTIONS</li>
+<li>TRACE</li>
+<li>PATCH</li>
+</ul>
+</li>
+<li><strong>Or if it has a header other than:</strong>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type</li>
+<li>DPR</li>
+<li>Downlink</li>
+<li>Save-Data</li>
+<li>Viewport-Width</li>
+<li>Width</li>
+</ul>
+</li>
+<li><strong>Or if it has a <code>Content-Type</code> header other than:</strong>
+<ul>
+<li>application/x-www-form-urlencoded</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ul>
+</li>
+<li>Or if a <code>ReadableStream</code> or event listeners in <code>XMLHttpRequestUpload</code> are used.</li>
+</ul>
+<p>If any of the conditions above are met, a preflight request with the <code>OPTIONS</code> method is sent to the resource URL.</p>
+<p>Let's suppose we are making a <code>POST</code> request to a fictional JSON API at <code>https://api.example.com</code> with a <code>Content-Type</code> of <code>application/json</code>. The preflight request would be like this (some default headers omitted for clarity):</p>
+<pre><code class="language-http">OPTIONS / HTTP/1.1
+Host: api.example.com
+Origin: http://localhost:8080
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: Content-Type
+</code></pre>
+<p>If the server is CORS enabled, it will parse the <code>Access-Control-Request-*</code> headers and understand that a <code>POST</code> request is trying to be made from <code>http://localhost:8080</code> with a custom <code>Content-Type</code>.</p>
+<p>The server will then respond to this preflight with which origins, methods, and headers are allowed by using the <code>Access-Control-Allow-*</code> headers:</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:8080
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Headers: Content-Type
+</code></pre>
+<p>If the returned origin and method don't match the ones from the actual request, or any of the headers used are not allowed, the request will be blocked by the browser and an error will be shown in the console. Otherwise, the request will be made after the preflight.</p>
+<p>In our example, since the API expects JSON, all <code>POST</code> requests will have a <code>Content-Type: application/json</code> header and always be preflighted.</p>
+<h3 id="simplerequests">Simple requests</h3>
+<p>Some requests are always considered safe to send and don't need a preflight if they meet all of the following conditions:</p>
+<ul>
+<li><strong>The method is:</strong>
+<ul>
+<li>GET</li>
+<li>HEAD</li>
+<li>POST</li>
+</ul>
+</li>
+<li><strong>Have only these headers:</strong>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type</li>
+<li>DPR</li>
+<li>Downlink</li>
+<li>Save-Data</li>
+<li>Viewport-Width</li>
+<li>Width</li>
+</ul>
+</li>
+<li><strong>The <code>Content-Type</code> header is:</strong>
+<ul>
+<li>application/x-www-form-urlencoded</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ul>
+</li>
+<li>No <code>ReadableStream</code> or event listeners in <code>XMLHttpRequestUpload</code> are used.</li>
+</ul>
+<p>In our example API, <code>GET</code> requests don't need to be preflighted because no JSON data is being sent, and so the app doesn't need to use the <code>Content-Type: application/json</code> header. They will always be simple requests.</p>
+<h2 id="corsheaders">CORS Headers</h2>
+<h3 id="serverheadersresponse">Server Headers (Response)</h3>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Access-Control-Allow-Origin</strong></td>
+<td><code>origin</code> or <code>*</code></td>
+<td>Specifies the origin to be allowed, like <code>http://localhost:8080</code> or <code>*</code> to allow all origins.</td>
+</tr>
+<tr>
+<td><strong>Access-Control-Allow-Methods</strong></td>
+<td><code>methods</code></td>
+<td>Which methods are allowed when accessing the resource: <code>GET</code>, <code>HEAD</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>, <code>CONNECT</code>, <code>OPTIONS</code>, <code>TRACE</code>, <code>PATCH</code>.</td>
+</tr>
+<tr>
+<td><strong>Access-Control-Allow-Headers</strong></td>
+<td><code>headers</code></td>
+<td>Used in response to a preflight request to indicate which headers can be used when making the actual request, aside from the <a href="#simple-requests">simple headers</a>, which are always allowed.</td>
+</tr>
+<tr>
+<td>Access-Control-Allow-Credentials</td>
+<td><code>true</code> or <code>false</code></td>
+<td>Whether or not the request can be made with credentials.</td>
+</tr>
+<tr>
+<td>Access-Control-Expose-Headers</td>
+<td><code>headers</code></td>
+<td>Whitelists the headers that the browser is allowed to access.</td>
+</tr>
+<tr>
+<td>Access-Control-Max-Age</td>
+<td><code>seconds</code></td>
+<td>Indicates how long the results of a preflight request can be cached.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="browserheadersrequest">Browser Headers (Request)</h3>
+<p>The browser automatically sends the appropriate headers for CORS in every request to the server, including the preflight requests. Please note that the headers below are for reference only, and <strong>should not be set in your app code</strong> (the browser will ignore them).</p>
+<h4 id="allrequests">All Requests</h4>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Origin</strong></td>
+<td><code>origin</code></td>
+<td>Indicates the origin of the request.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="preflightrequests">Preflight Requests</h4>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Access-Control-Request-Method</strong></td>
+<td><code>method</code></td>
+<td>Used to let the server know what method will be used when the actual request is made.</td>
+</tr>
+<tr>
+<td>Access-Control-Request-Headers</td>
+<td><code>headers</code></td>
+<td>Used to let the server know what non-simple headers will be used when the actual request is made.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="solutionsforcorserrors">Solutions for CORS Errors</h2>
+<h3 id="aenablingcorsinaserveryoucontrol">A. Enabling CORS in a server you control</h3>
+<p>The correct and easiest solution is to enable CORS by returning the <a href="#server-headers-response-">right response headers</a> from the web server or backend and responding to preflight requests, as it allows to keep using <code>XMLHttpRequest</code>, <code>fetch</code>, or abstractions like <code>HttpClient</code> in Angular.</p>
+<p>These are the recommended <code>Access-Control-Allow-Origin</code> headers for Ionic apps. Please note that these headers have to be sent from the server, and don't belong in your app code.</p>
+<p><strong>Capacitor</strong></p>
+<pre><code class="language-http">Access-Control-Allow-Origin: capacitor://localhost, http://localhost
+</code></pre>
+<p><em>Replace <code>localhost</code> with your own hostname if you have changed the default in the Capacitor config.</em></p>
+<p><strong>Ionic WebView plugin on Cordova</strong></p>
+<pre><code class="language-http">Access-Control-Allow-Origin: http://localhost:8080
+</code></pre>
+<p><em>Replace port <code>8080</code> with your own if you have changed the default in the plugin config.</em></p>
+<p><strong>Ionic Serve for local development</strong></p>
+<pre><code class="language-http">Access-Control-Allow-Origin: http://localhost:8100
+</code></pre>
+<p>Allowing any origin with <code>Access-Control-Allow-Origin: *</code> is guaranteed to work in all scenarios but may have security implications — like some CSRF attacks — depending on how the server controls access to resources and use sessions and cookies.</p>
+<p>For more information on how to enable CORS in different web and app servers, please check <a href="https://enable-cors.org" target="_blank" rel="noopener">enable-cors.org</a></p>
+<p>In Express-compatible Node.js apps, CORS can be easily enabled with the <a href="https://github.com/expressjs/cors" target="_blank" rel="noopener">cors</a> package.</p>
+<h3 id="bworkingaroundcorsinaserveryoucantcontrol">B. Working around CORS in a server you can't control</h3>
+<h4 id="dontleakyourkeys">Don't leak your keys!</h4>
+<p>If you are trying to connect to a 3rd-party API, first check in its documentation that is safe to use it directly from the app (client-side) and that it won't leak any secret/private keys or credentials, as it's easy to see them in clear text in Javascript code. Many APIs don't support CORS on purpose, in order to force developers to use them in the server and protect important information or keys.</p>
+<h4 id="1nativeonlyappsiosandroid">1. Native-only apps (iOS/Android)</h4>
+<p>Use the <a href="https://fdezromero.com/docs/native/http/" target="_blank" rel="noopener">HTTP plugin from Ionic Native</a> to make the requests natively from outside the webview. Please note that this plugin doesn't work in the browser, so the development and testing of the app must always be done in a device or simulator going forward.</p>
+<p><strong>Usage in Ionic Angular 4</strong></p>
+<pre><code class="language-typescript">import { Component } from '@angular/core';
+import { HTTP } from '@ionic-native/http/ngx';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
+})
+export class HomePage {
+  constructor(private http: HTTP) {}
+
+  async getData() {
+    try {
+      const url = 'https://api.example.com';
+      const params = {};
+      const headers = {};
+
+      const response = await this.http.get(url, params, headers);
+
+      console.log(response.status);
+      console.log(JSON.parse(response.data)); // JSON data returned by server
+      console.log(response.headers);
+
+    } catch (error) {
+      console.error(error.status);
+      console.error(error.error); // Error message as string
+      console.error(error.headers);
+    }
+  }
+}
+</code></pre>
+<h4 id="2nativepwas">2. Native + PWAs</h4>
+<p>Send the requests through an HTTP/HTTPS proxy that bypasses them to the external resources and adds the necessary CORS headers to the responses. This proxy must be trusted or under your control, as it will be intercepting most traffic made by the app.</p>
+<p>Also, keep in mind that the browser or webview will not receive the original HTTPS certificates but the one being sent from the proxy if provided. URLs may need to be rewritten in your code in order to use the proxy.</p>
+<p>Check <a href="https://github.com/Rob--W/cors-anywhere/" target="_blank" rel="noopener">cors-anywhere</a> for a Node.js CORS proxy that can be deployed in your own server. Using free hosted CORS proxies in production is not recommended.</p>
+<h3 id="cdisablingcorsorbrowserwebsecurity">C. Disabling CORS or browser web security</h3>
+<p>Please be aware that CORS exists for a reason (security of user data and to prevent attacks against your app). <strong>It's not possible or advisable to try to disable CORS</strong>.</p>
+<p>Older webviews like <code>UIWebView</code> on iOS don't enforce CORS but are deprecated and are very likely to disappear soon. Modern webviews like iOS <code>WKWebView</code> or Android <code>WebView</code> (both used by Capacitor) do enforce CORS and provide huge security and performance improvements.</p>
+<p>If you are developing a PWA or testing in the browser, using the <code>--disable-web-security</code> flag in Google Chrome or an extension to disable CORS is a really bad idea. You will be exposed to all kind of attacks, you can't ask your users to take the risk, and your app won't work once in production.</p>
+<hr>
+<p><strong>Sources</strong></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank" rel="noopener">MDN</a></li>
+</ul>
+]]></content:encoded></item><item><title><![CDATA[How I Host this Static Ghost Blog on Github Pages with wget]]></title><description><![CDATA[Generating a static site from a local Ghost blog with wget instead of Buster and hosting it at GitHub Pages.]]></description><link>https://fdezromero.com/how-i-host-this-static-ghost-blog-on-github-pages-with-wget/</link><guid isPermaLink="false">5bf2dae9d5546074beaea791</guid><category><![CDATA[Web]]></category><dc:creator><![CDATA[Rodrigo Fernández]]></dc:creator><pubDate>Mon, 19 Nov 2018 17:19:17 GMT</pubDate><media:content url="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=89d7af25dada5ebfb09405ae87cf372f" medium="image"/><content:encoded><![CDATA[<img src="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=89d7af25dada5ebfb09405ae87cf372f" alt="How I Host this Static Ghost Blog on Github Pages with wget"><p>Lately I've been wanting to go back to writing more on my personal blog, so I'm currently in the process of gathering articles, slides, videos and code samples I wrote on various platforms.</p><p>Initially I wanted to write articles and pages in Markdown, generate some static blog pages from them, push to a repository, and host them in GitHub Pages. I tried several approaches, including building my blog off the <a href="https://github.com/ionic-team/stencil-site">great Stencil site generator</a>. But then decided that I didn't want to deal too much with templates and design, or I would spend more time coding and I'd never get to writing 😙</p><p>Coming from Medium, I liked Ghost's design and simplicity the most. Keeping another Node.js server with NGNIX and MySQL, backups and so on, not so much 😅. I found some middle ground installing Ghost locally (with the database in a SQLite file I can commit to a repo) and generating a static site with all the articles and pages.</p><p>I found many how-to's using Buster, a Python tool that automates the process of grabbing every page generating the site. The problem is that I soon noticed that the tool is no longer maintained and many things have changed in Ghost after it was last updated, so the result is essentially broken. I spent the rest of the day trying all the other forks with different results: some fixed some things and others fixed some other things. Either links were still pointing to localhost or pages were missing.</p><p>Then I remembered that the fantastic <code>wget</code> command has some backup and mirroring features, which Buster were also using under the hood. So I wrote a very simple bash script to automate the static generation process.</p><p>Here are the steps I followed to set up this blog. If you have a local Ghost installation, you can skip ahead to the script.</p><hr><h3 id="installing-ghost-locally">Installing Ghost locally</h3><p>To <a href="https://docs.ghost.org/install/local/">install Ghost locally</a> you will need the following:</p><ul><li>A supported version of <strong>Node.js</strong></li><li><strong>npm</strong> or <strong>yarn</strong> to manage packages</li><li>A clean, empty directory on your machine</li></ul><p>Ghost has a nice CLI tool we can install globally to handle multiple blogs:</p><pre><code class="language-bash">npm install -g ghost-cli
 </code></pre>
 <p>Then we need to create the empty directory were we want to store the blog, <code>cd</code> into it and run the local install command:</p><pre><code class="language-bash">ghost install local
 </code></pre>
