@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://fdezromero.com/cors-errors-in-ionic-apps/" />
     <meta property="og:image" content="https://fdezromero.com/content/images/2019/02/cors-error.png" />
     <meta property="article:published_time" content="2019-02-05T17:30:00.000Z" />
-    <meta property="article:modified_time" content="2019-02-05T18:08:59.000Z" />
+    <meta property="article:modified_time" content="2019-02-06T13:57:10.000Z" />
     <meta property="article:tag" content="Ionic" />
     <meta property="article:tag" content="Web" />
     
@@ -64,7 +64,7 @@
     "headline": "CORS Errors in Ionic Apps",
     "url": "https://fdezromero.com/cors-errors-in-ionic-apps/",
     "datePublished": "2019-02-05T17:30:00.000Z",
-    "dateModified": "2019-02-05T18:08:59.000Z",
+    "dateModified": "2019-02-06T13:57:10.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://fdezromero.com/content/images/2019/02/cors-error.png",
@@ -118,13 +118,12 @@
                 <h2 id="whatiscors">What is CORS?</h2>
 <p><strong>Cross-Origin Resource Sharing (CORS)</strong> is a mechanism that browsers and webviews — like the ones powering Capacitor and Cordova — use to restrict HTTP and HTTPS requests made from scripts to resources in a different origin for security reasons, mainly to protect your user's data and prevent attacks that would compromise your app.</p>
 <p>In order to know if an external origin supports CORS, the server has to send some <a href="#cors-headers">special headers</a> for the browser to allow the requests.</p>
-<p>An <strong>origin</strong> is the combination of the <strong>protocol</strong>, <strong>domain</strong>, and <strong>port</strong> from which your Ionic app or the external resource is served. For example, apps running in Capacitor have <code>capacitor://localhost</code> (iOS) or <code>http://localhost</code> (Android) as their origin, and Cordova apps may run from <code>http://localhost:8080</code> or the <code>file://</code> protocol.</p>
-<p>When the origin of your app (e.g. <code>https://localhost:8080</code>) and the origin of the resource being requested (e.g. <code>https://api.example.com</code>) don't match, the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener">Same Origin Policy</a> takes effect and CORS is required for the request to be made.</p>
+<p>An <strong>origin</strong> is the combination of the <strong>protocol</strong>, <strong>domain</strong>, and <strong>port</strong> from which your Ionic app or the external resource is served. For example, apps running in Capacitor have <code>capacitor://localhost</code> (iOS) or <code>http://localhost</code> (Android) as their origin.</p>
+<p>When the origin where your app is served (e.g. <code>http://localhost:8100</code> with <code>ionic serve</code>) and the origin of the resource being requested (e.g. <code>https://api.example.com</code>) don't match, the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener">Same Origin Policy</a> takes effect and CORS is required for the request to be made.</p>
 <p>CORS errors are common in web apps when a cross-origin request is made but the server doesn't return the required headers in the response (is not CORS-enabled):</p>
-<pre><code>XMLHttpRequest cannot load https://api.example.com.
-No 'Access-Control-Allow-Origin' header is present on the requested resource.
-Origin 'http://localhost:8080' is therefore not allowed access.
-</code></pre>
+<blockquote>
+  XMLHttpRequest cannot load https://api.example.com. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8100' is therefore not allowed access.
+</blockquote>
 <h2 id="howdoescorswork">How does CORS work</h2>
 <h3 id="requestwithpreflight">Request with preflight</h3>
 <p>By default, when a web app tries to make a cross-origin request the browser sends a <strong>preflight request</strong> before the actual request. This preflight request is needed in order to know if the external resource supports CORS and if the actual request can be sent safely, since it may impact user data.</p>
@@ -166,14 +165,14 @@ Origin 'http://localhost:8080' is therefore not allowed access.
 <p>Let's suppose we are making a <code>POST</code> request to a fictional JSON API at <code>https://api.example.com</code> with a <code>Content-Type</code> of <code>application/json</code>. The preflight request would be like this (some default headers omitted for clarity):</p>
 <pre><code class="language-http">OPTIONS / HTTP/1.1
 Host: api.example.com
-Origin: http://localhost:8080
+Origin: http://localhost:8100
 Access-Control-Request-Method: POST
 Access-Control-Request-Headers: Content-Type
 </code></pre>
-<p>If the server is CORS enabled, it will parse the <code>Access-Control-Request-*</code> headers and understand that a <code>POST</code> request is trying to be made from <code>http://localhost:8080</code> with a custom <code>Content-Type</code>.</p>
+<p>If the server is CORS enabled, it will parse the <code>Access-Control-Request-*</code> headers and understand that a <code>POST</code> request is trying to be made from <code>http://localhost:8100</code> with a custom <code>Content-Type</code>.</p>
 <p>The server will then respond to this preflight with which origins, methods, and headers are allowed by using the <code>Access-Control-Allow-*</code> headers:</p>
 <pre><code class="language-http">HTTP/1.1 200 OK
-Access-Control-Allow-Origin: http://localhost:8080
+Access-Control-Allow-Origin: http://localhost:8100
 Access-Control-Allow-Methods: GET, POST, OPTIONS
 Access-Control-Allow-Headers: Content-Type
 </code></pre>
@@ -226,7 +225,7 @@ Access-Control-Allow-Headers: Content-Type
 <tr>
 <td><strong>Access-Control-Allow-Origin</strong></td>
 <td><code>origin</code> or <code>*</code></td>
-<td>Specifies the origin to be allowed, like <code>http://localhost:8080</code> or <code>*</code> to allow all origins.</td>
+<td>Specifies the origin to be allowed, like <code>http://localhost:8100</code> or <code>*</code> to allow all origins.</td>
 </tr>
 <tr>
 <td><strong>Access-Control-Allow-Methods</strong></td>
@@ -299,21 +298,127 @@ Access-Control-Allow-Headers: Content-Type
 <h2 id="solutionsforcorserrors">Solutions for CORS Errors</h2>
 <h3 id="aenablingcorsinaserveryoucontrol">A. Enabling CORS in a server you control</h3>
 <p>The correct and easiest solution is to enable CORS by returning the <a href="#server-headers-response-">right response headers</a> from the web server or backend and responding to preflight requests, as it allows to keep using <code>XMLHttpRequest</code>, <code>fetch</code>, or abstractions like <code>HttpClient</code> in Angular.</p>
-<p>These are the recommended <code>Access-Control-Allow-Origin</code> headers for Ionic apps. Please note that these headers have to be sent from the server, and don't belong in your app code.</p>
-<p><strong>Capacitor</strong></p>
-<pre><code class="language-http">Access-Control-Allow-Origin: capacitor://localhost, http://localhost
-</code></pre>
-<p><em>Replace <code>localhost</code> with your own hostname if you have changed the default in the Capacitor config.</em></p>
-<p><strong>Ionic WebView plugin on Cordova</strong></p>
-<pre><code class="language-http">Access-Control-Allow-Origin: http://localhost:8080
-</code></pre>
-<p><em>Replace port <code>8080</code> with your own if you have changed the default in the plugin config.</em></p>
-<p><strong>Ionic Serve for local development</strong></p>
-<pre><code class="language-http">Access-Control-Allow-Origin: http://localhost:8100
-</code></pre>
+<p>Ionic apps may be run from different origins, but only one origin can be specified in the <code>Access-Control-Allow-Origin</code> header. Therefore we recommend checking the value of the <code>Origin</code> header from the request and reflecting it in the <code>Access-Control-Allow-Origin</code> header in the response.</p>
+<p>Please note that all of the <code>Access-Control-Allow-*</code> headers have to be sent from the server, and don't belong in your app code.</p>
+<p>Here are some of the origins your Ionic app may be served from:</p>
+<h4 id="capacitor">Capacitor</h4>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iOS</td>
+<td><code>capacitor://localhost</code></td>
+</tr>
+<tr>
+<td>Android</td>
+<td><code>http://localhost</code></td>
+</tr>
+</tbody>
+</table>
+<p>Replace <code>localhost</code> with your own hostname if you have changed the default in the Capacitor config.</p>
+<h4 id="ionicwebview3xpluginoncordova">Ionic WebView 3.x plugin on Cordova</h4>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iOS</td>
+<td><code>ionic://localhost</code></td>
+</tr>
+<tr>
+<td>Android</td>
+<td><code>http://localhost</code></td>
+</tr>
+</tbody>
+</table>
+<p>Replace <code>localhost</code> with your own hostname if you have changed the default in the plugin config.</p>
+<h4 id="ionicwebview2xpluginoncordova">Ionic WebView 2.x plugin on Cordova</h4>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iOS</td>
+<td><code>http://localhost:8080</code></td>
+</tr>
+<tr>
+<td>Android</td>
+<td><code>http://localhost:8080</code></td>
+</tr>
+</tbody>
+</table>
+<p>Replace port <code>8080</code> with your own if you have changed the default in the plugin config.</p>
+<h4 id="localdevelopmentinthebrowser">Local development in the browser</h4>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ionic serve</code></td>
+<td><code>http://localhost:8100</code> or <code>http://YOUR_MACHINE_IP:8100</code></td>
+</tr>
+<tr>
+<td><code>npm run start</code> or <code>ng serve</code></td>
+<td><code>http://localhost:4200</code> for Ionic Angular apps.</td>
+</tr>
+</tbody>
+</table>
+<p>Port numbers can be higher if you are serving multiple apps at the same time.</p>
+<br />
 <p>Allowing any origin with <code>Access-Control-Allow-Origin: *</code> is guaranteed to work in all scenarios but may have security implications — like some CSRF attacks — depending on how the server controls access to resources and use sessions and cookies.</p>
 <p>For more information on how to enable CORS in different web and app servers, please check <a href="https://enable-cors.org" target="_blank" rel="noopener">enable-cors.org</a></p>
-<p>In Express-compatible Node.js apps, CORS can be easily enabled with the <a href="https://github.com/expressjs/cors" target="_blank" rel="noopener">cors</a> package.</p>
+<p>CORS can be easily enabled in Express/Connect apps with the <a href="https://github.com/expressjs/cors" target="_blank" rel="noopener">cors</a> middleware:</p>
+<pre><code class="language-javascript">const express = require('express');
+const cors = require('cors');
+const app = express();
+
+const whitelist = [
+  'capacitor://localhost',
+  'ionic://localhost',
+  'http://localhost',
+  'http://localhost:8080',
+  'http://localhost:8100'
+];
+
+// Reflect the origin if it's in the whitelist or not defined (cURL, Postman, etc.)
+const corsOptions = {
+  origin: (origin, callback) =&gt; {
+    if (whitelist.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Origin not allowed by CORS'));
+    }
+  }
+}
+
+// Enable preflight requests for all routes
+app.options('*', cors(corsOptions));
+
+app.get('/', cors(corsOptions), (req, res, next) =&gt; {
+  res.json({ message: 'This route is CORS-enabled for a whitelisted origin.' });
+})
+
+app.listen(3000, () =&gt; {
+  console.log('CORS-enabled web server listening on port 3000');
+});
+</code></pre>
 <h3 id="bworkingaroundcorsinaserveryoucantcontrol">B. Working around CORS in a server you can't control</h3>
 <h4 id="dontleakyourkeys">Don't leak your keys!</h4>
 <p>If you are trying to connect to a 3rd-party API, first check in its documentation that is safe to use it directly from the app (client-side) and that it won't leak any secret/private keys or credentials, as it's easy to see them in clear text in Javascript code. Many APIs don't support CORS on purpose, in order to force developers to use them in the server and protect important information or keys.</p>
@@ -353,15 +458,15 @@ export class HomePage {
 </code></pre>
 <h4 id="2nativepwas">2. Native + PWAs</h4>
 <p>Send the requests through an HTTP/HTTPS proxy that bypasses them to the external resources and adds the necessary CORS headers to the responses. This proxy must be trusted or under your control, as it will be intercepting most traffic made by the app.</p>
-<p>Also, keep in mind that the browser or webview will not receive the original HTTPS certificates but the one being sent from the proxy if provided. URLs may need to be rewritten in your code in order to use the proxy.</p>
+<p>Also, keep in mind that the browser or webview will not receive the original HTTPS certificates but the one being sent from the proxy if it's provided. URLs may need to be rewritten in your code in order to use the proxy.</p>
 <p>Check <a href="https://github.com/Rob--W/cors-anywhere/" target="_blank" rel="noopener">cors-anywhere</a> for a Node.js CORS proxy that can be deployed in your own server. Using free hosted CORS proxies in production is not recommended.</p>
 <h3 id="cdisablingcorsorbrowserwebsecurity">C. Disabling CORS or browser web security</h3>
 <p>Please be aware that CORS exists for a reason (security of user data and to prevent attacks against your app). <strong>It's not possible or advisable to try to disable CORS</strong>.</p>
 <p>Older webviews like <code>UIWebView</code> on iOS don't enforce CORS but are deprecated and are very likely to disappear soon. Modern webviews like iOS <code>WKWebView</code> or Android <code>WebView</code> (both used by Capacitor) do enforce CORS and provide huge security and performance improvements.</p>
 <p>If you are developing a PWA or testing in the browser, using the <code>--disable-web-security</code> flag in Google Chrome or an extension to disable CORS is a really bad idea. You will be exposed to all kind of attacks, you can't ask your users to take the risk, and your app won't work once in production.</p>
-<hr></hr>
 <p><strong>Sources</strong></p>
 <ul>
+<li><a href="https://fdezromero.com/cors-errors-in-ionic-apps" target="_blank" rel="noopener">CORS Errors in Ionic Apps</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank" rel="noopener">MDN</a></li>
 </ul>
 
