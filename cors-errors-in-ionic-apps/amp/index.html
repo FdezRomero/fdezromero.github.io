@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://fdezromero.com/cors-errors-in-ionic-apps/" />
     <meta property="og:image" content="https://fdezromero.com/content/images/2019/02/cors-error.png" />
     <meta property="article:published_time" content="2019-02-05T17:30:00.000Z" />
-    <meta property="article:modified_time" content="2019-02-06T13:57:10.000Z" />
+    <meta property="article:modified_time" content="2019-02-14T16:22:33.000Z" />
     <meta property="article:tag" content="Ionic" />
     <meta property="article:tag" content="Web" />
     
@@ -64,7 +64,7 @@
     "headline": "CORS Errors in Ionic Apps",
     "url": "https://fdezromero.com/cors-errors-in-ionic-apps/",
     "datePublished": "2019-02-05T17:30:00.000Z",
-    "dateModified": "2019-02-06T13:57:10.000Z",
+    "dateModified": "2019-02-14T16:22:33.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://fdezromero.com/content/images/2019/02/cors-error.png",
@@ -245,7 +245,7 @@ Access-Control-Allow-Headers: Content-Type
 <tr>
 <td>Access-Control-Expose-Headers</td>
 <td><code>headers</code></td>
-<td>Whitelists the headers that the browser is allowed to access.</td>
+<td>Specifies the headers that the browser is allowed to access.</td>
 </tr>
 <tr>
 <td>Access-Control-Max-Age</td>
@@ -389,7 +389,7 @@ Access-Control-Allow-Headers: Content-Type
 const cors = require('cors');
 const app = express();
 
-const whitelist = [
+const allowedOrigins = [
   'capacitor://localhost',
   'ionic://localhost',
   'http://localhost',
@@ -397,10 +397,10 @@ const whitelist = [
   'http://localhost:8100'
 ];
 
-// Reflect the origin if it's in the whitelist or not defined (cURL, Postman, etc.)
+// Reflect the origin if it's in the allowed list or not defined (cURL, Postman, etc.)
 const corsOptions = {
   origin: (origin, callback) =&gt; {
-    if (whitelist.includes(origin) || !origin) {
+    if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error('Origin not allowed by CORS'));
@@ -412,7 +412,7 @@ const corsOptions = {
 app.options('*', cors(corsOptions));
 
 app.get('/', cors(corsOptions), (req, res, next) =&gt; {
-  res.json({ message: 'This route is CORS-enabled for a whitelisted origin.' });
+  res.json({ message: 'This route is CORS-enabled for an allowed origin.' });
 })
 
 app.listen(3000, () =&gt; {
@@ -466,7 +466,6 @@ export class HomePage {
 <p>If you are developing a PWA or testing in the browser, using the <code>--disable-web-security</code> flag in Google Chrome or an extension to disable CORS is a really bad idea. You will be exposed to all kind of attacks, you can't ask your users to take the risk, and your app won't work once in production.</p>
 <p><strong>Sources</strong></p>
 <ul>
-<li><a href="https://fdezromero.com/cors-errors-in-ionic-apps" target="_blank" rel="noopener">CORS Errors in Ionic Apps</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank" rel="noopener">MDN</a></li>
 </ul>
 
